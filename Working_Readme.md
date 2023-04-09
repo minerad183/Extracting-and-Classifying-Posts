@@ -3,7 +3,6 @@
 # Extracting, Modeling, Classifying, and Displaying Geolocated Social Media Posts from the Russia-Ukraine War
 
 **Author: Adam Miner**
-**DSI 221**
 
 ## Problem Statement and Context
 
