@@ -3,7 +3,6 @@ streamlit
 plotly
 numpy
 geopandas
-pickle
 json
 shapely
 nltk
