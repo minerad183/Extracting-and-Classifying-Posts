@@ -2,11 +2,21 @@ import streamlit as st
 import pandas as pd
 import geopandas as gpd
 import pickle
+import os
 import pyproj
 import plotly.graph_objs as go
 import json
 import shapely
 import streamlit.components.v1 as components
+from nltk.corpus import stopwords
+from nltk.stem import SnowballStemmer
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
+
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 
 #Read in data
 clusters_df = pd.read_csv('./data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
@@ -100,6 +110,128 @@ layout = dict(title_text ='Russia-Ukraine Conflict Interactive Map', title_x =0.
          lon=35),accesstoken= mapboxtoken, zoom=4,style="carto-positron"))
 
 clusters_names = clusters_df.clusters
+
+# Stopword removal
+stpwrd = stopwords.words('english')
+new_stopwords = ["twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
+                 'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
+                'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
+                'õ', 'ð', 'ã', 'Ý', 'Ü', 'Û', 'Ú', 'Ù', 'Ï', 'Î', 'Í', 'Ì', 'Ë', 'Ê', 'É', 'È', 'Å', 'Ä', 'Ã', 'Â', 'Á', 'À', 'Ö', 'Õ', 'Ô','Ó', 'Ò',
+                'ÂƒÆ', 'â', 'Âƒâ', 'šâ', 'šÂ', 'Ž', 'žÂ', 'ÃƒÆ', 'Ãƒâ', 'ƒ', 'šÃ'  ] #add update to this
+stpwrd.extend(new_stopwords)
+
+#Define a word cleaning function
+def review_to_wordlist(review, remove_stopwords=True):
+    # Clean the text, with the option to remove stopwords.
+    
+    # Convert words to lower case and split them
+    words = review.lower().split()
+
+    # Optionally remove stop words (true by default)
+    if remove_stopwords:
+        words = [w for w in words if not w in stpwrd]
+    
+    review_text = " ".join(words)
+
+    # Clean the text
+    review_text = re.sub(r"[^A-Za-z0-9(),!.?\'\`]", " ", review_text)
+    review_text = re.sub(r"\'s", " 's ", review_text)
+    review_text = re.sub(r"\'ve", " 've ", review_text)
+    review_text = re.sub(r"n\'t", " 't ", review_text)
+    review_text = re.sub(r"\'re", " 're ", review_text)
+    review_text = re.sub(r"\'d", " 'd ", review_text)
+    review_text = re.sub(r"\'ll", " 'll ", review_text)
+    review_text = re.sub(r",", " ", review_text)
+    review_text = re.sub(r"\.", " ", review_text)
+    review_text = re.sub(r"!", " ", review_text)
+    review_text = re.sub(r"\(", " ( ", review_text)
+    review_text = re.sub(r"\)", " ) ", review_text)
+    review_text = re.sub(r"\?", " ", review_text)
+    review_text = re.sub(r"\s{2,}", " ", review_text)
+    review_text = re.sub(r"\s{2,}", " ", review_text)
+    for i in new_stopwords:
+        review_text = re.sub(i, " ", review_text)
+    words = review_text.split()
+    
+    # Shorten words to their stems
+    stemmer = SnowballStemmer('english', ignore_stopwords = True)
+    stemmed_words = [stemmer.stem(word) for word in words]
+    
+    review_text = " ".join(stemmed_words)
+    
+    # Return a list of words
+    return(review_text)
+
+
+
+# Define the model prediction function and return display here
+def cluster_display_function(text_values):
+    #Clean the text
+    vect_text = review_to_wordlist(text_values, remove_stopwords=True)
+    if input_text is not None:
+        st.write('Progress: returning your cleaned up text...')
+    st.write(review_to_wordlist(text_values, remove_stopwords=True))
+    # I don't understand why, but I need to basically have a corpus of data to fit and then predict the model, so the pickle is almost useless...
+    postfeatures = []
+    for i in clusters_df['list_text']:
+        postfeatures.append(review_to_wordlist(i, remove_stopwords=True))
+    y =  clusters_df['clusters']
+    with open("./data/vectorizer.pkl", 'rb') as picklefile:
+        vectorizer  = pickle.load(picklefile)
+    vectorizer = TfidfVectorizer(stop_words='english')
+    X = vectorizer.fit_transform(postfeatures)
+    #Next, fit the text into the classifier model
+    with open("./data/class_model.pkl", 'rb') as picklefile:
+        model  = pickle.load(picklefile)
+    model.fit(X, y)
+    #Append the vect_text into the postfeatures space and then use the model predict on it - call the last entry
+    #Drop word if it does not appear in current postfeatures list (otherwise the model gets messed up)
+    processing_text = vect_text.split()
+    word_list = [word for sentence in postfeatures for word in sentence.split()]
+    processing_text = [word for word in processing_text if word in word_list]
+    processing_text = ' '.join(processing_text)
+    postfeatures.append(processing_text)
+    vector_text = vectorizer.fit_transform(postfeatures)
+    preds = model.predict(vector_text)
+    preds_df = pd.DataFrame({'Postfeatures': postfeatures, 'Prediction': preds})
+    txt_df = pd.DataFrame(data = {'Input Text' : text_values}, index=[0])
+    txt_df['Cluster'] = preds[-1]
+    st.write(txt_df)
+    if preds[-1] == 0:
+        st.header('''Russian Movements and Activities''')
+        st.write("""Cluster 0: Russian Movements and Activities. This cluster is focused on Russian movements, troops, and vehicles, inside Ukraine, Russia, and Belarus. This cluster is predictive in the long-term, as announcements or observations of movement are reported on early on, and again reported once the movement has taken place, typically at least a week out. This cluster is helpful to look at as a precursor to offenses, as spikes in activities are associated with Russian mobilizations and deployments.""")
+    elif preds[-1] == 1:
+        st.header('''Global Russian and Ukrainian Activities''')
+        st.write("""Cluster 1: Global Russian and Ukrainian Activities. This cluster has the most amount of posts in it, has a much more global dispersal, and is more generalizable, focused on Russian and Ukrainian-related activities writ-large. This cluster's activity has stayed relatively consistent since November 2022, at a lower level than previously. It will be interesting if other clusters evolve to envelop more of the data as the conflict continues.""")
+    elif preds[-1] == 2:
+        st.header('''The Siege of Mariupol''')
+        st.write("""Cluster 2: The Siege of Mariupol. This cluster is directly related to activities around the siege of the city of Mariupol. It is geographically focused on the city, and the timeline of events back it up. The siege was initiated early on in the conflict, was reported on as the city was bombed and assaulted by Russian soldiers, and then eventually activity lulled when the Ukrainian soldiers surrendered. Recently activity spiked due to Russian President Vladimir Putin visiting the city in March 2023. There is predicted to be little activity in this cluster, though if activity in this cluster picks up it might be indicative of a Ukrainian push to retake the city.""")
+    elif preds[-1] == 3:
+        st.header('''The Destruction Cluster''')
+        st.write("""Cluster 3: The Destruction Cluster. This cluster is focused on destruction wrought by both Russia and Ukraine, as the geographic locations, presumably locations of shelling and other attacks, of these activities are contained largely within Ukraine and Russia. This cluster seems to be related to offenses taken by either side, as well as lulls in fighting as artillery and materiel supplies dwindle. There has recently been an increase in activity in this cluster, as Russia had initiated an offensive in the Donbas region of Ukraine.""")
+    elif preds[-1] == 4:
+        st.header('''Ukrainian Positions and Activities''')
+        st.write("""Cluster 4: Ukrainian Positions and Activities. This cluster is focused on what Ukraine is doing in its battle plans. Activities related to troop movements, positioning, and UAV flights. Geographically the locations of the activities are focused in Eastern Ukraine, as there is a focus on defending the Donbas region. Previous spikes in activity have occurred when Ukraine was moving troops to retake parts of the country. Notably, this cluster has seen a significant decrease in activity recently, but very likely any increase in activity in this cluster means a possible Ukrainian counteroffensive.""")
+    elif preds[-1] == 5:
+        st.header('''Battle for Bakhmut''')
+        st.write("""Cluster 5: Battle for Bakhmut. This cluster is focused on the Donbas, specifically the Donetsk Oblast in Ukraine. It is primarily concerned with activities around the besieged city, which has seen intense fighting since the late Fall, as Russia has focused its efforts on taking this city. It has very recently seen a massive spike in activity, as Russia's offsensive and Ukraine's fierce defense has resulted in the most active part of the conflict right now. Continued increase in this cluster is going to be indicative of intense fighting for the city. If this cluster decreases, it likely means the city has been taken over or is on the verge of being taken over by either side.""")
+    elif preds[-1] == 6:
+        st.header('''Satellite Imagery''')
+        st.write("""Cluster 6: Satellite Imagery. This cluster is focused all over Ukraine and in neighboring countries, and is associated with images and reporting that uses satellite imagery. There have been noteworthy spikes in this cluster since the conflict began, and seems to be indicative of potential uncovering of human rights abuses and atrocities. For example, there was a spike of activity in April 2022, when satellite imagery was used to uncover human rights abuses in the city of Bucha outside Kyiv. This was again repeated in November of 2022, when Ukraine concluded its counteroffensive and took back territory in Kherson and Kharkiv, and again satellite imagery helped uncover evidence of atrocities in the towns formerly controlled by the Russian forces. There has been a lull in this cluster recently, but any increase in activity in this cluster might be indicative of using satellite imagery to document cases of activities that journalists or people keyed in to social media cannot get to.""")
+        #Plot number of posts by cluster
+    plt.figure(figsize=(10,10))
+    preds_df.groupby('Prediction').size().sort_values(ascending=False).plot.bar()
+    plt.title('Breakdown of Clusters')
+    plt.xticks(rotation=0)
+    plt.xlabel("Cluster number")
+    plt.ylabel("Number of posts")
+    st.pyplot() 
+    
+       
+
+
+
+
 
 st.title("Social Media Posts of the Russia-Ukraine Conflict")
 st.subheader("Clustering Analysis")
@@ -209,3 +341,10 @@ elif page == 'Interactive Map':
     layout['updatemenus'] = updatemenus
 
     st.plotly_chart(fig, use_container_width = True)
+
+elif page == 'Predicting':
+    st.subheader('''This page allows you to enter in text of a tweet and have it be clustered by the model.''')
+    st.write('''Enter your text in the box below''')
+    input_text = st.text_input(label = 'Enter your text here', help = 'Make sure to use English words or translations.')
+    if st.button('Results'):
+        cluster_display_function(input_text)
