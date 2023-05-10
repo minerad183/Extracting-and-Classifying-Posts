@@ -9,7 +9,7 @@ import shapely
 import streamlit.components.v1 as components
 
 #Read in data
-clusters_df = pd.read_csv('../data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
+clusters_df = pd.read_csv('./data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
 clusters_df['geometry'] = clusters_df.apply(lambda row: shapely.Point(row['longitude'], row['latitude']), axis=1)
 clusters_df = gpd.GeoDataFrame(clusters_df, geometry='geometry')
 clusters_df = clusters_df.set_crs("EPSG:4326", allow_override=True)
@@ -18,7 +18,7 @@ Lat = clusters_df['latitude']
 Long = clusters_df['longitude']
 
 # set GeoJSON file path
-path = '../data/geojson.json'
+path = './data/geojson.json'
 # write GeoJSON to file
 clusters_df.to_file(path, driver = "GeoJSON", encoding='utf-8')
 with open(path, encoding = 'utf-8') as geofile:
@@ -29,6 +29,8 @@ for feature in j_file["features"]:
    feature ['id'] = str(i).zfill(2)
    i += 1
 
+#I used these sites to help make the interactive map: https://towardsdatascience.com/how-to-create-interactive-map-plots-with-plotly-7b57e889239a
+# https://towardsdatascience.com/build-a-multi-layer-map-using-streamlit-2b4d44eb28f3
 # mapbox token
 mapboxtoken = 'pk.eyJ1IjoibWluZXJhZCIsImEiOiJjbGhnYm5nZGEwM2JjM3FwbjBnbnN4cHQ4In0.r_9syT8uhNvtxeH4unVpRg'
 
@@ -93,17 +95,6 @@ for event in clusters_df['clusters'].unique():
         )                
     data.append(event_data)
 
-# cluster_0 = clusters_df.loc[clusters_df['clusters'] == 0 , :]
-
-# # define layers and plot map
-# choro = go.Choroplethmapbox(locations =  
-#         clusters_df[clusters_df['clusters'] == 0], geojson = j_file, 
-#         text = clusters_df['clusters'], marker_line_width=0.1) 
-# choro_0 = go.Choroplethmapbox(locations =  
-#         cluster_0, geojson = j_file, 
-#         text = cluster_0, marker_line_width=0.1) 
-# scatt = go.Scattermapbox(lat=Lat, lon=Long, mode='markers',    
-#         below='False', text = clusters_df['clusters'])
 layout = dict(title_text ='Russia-Ukraine Conflict Interactive Map', title_x =0.5,  
          width=950, height=700,mapbox = dict(center= dict(lat=47,  
          lon=35),accesstoken= mapboxtoken, zoom=4,style="carto-positron"))
@@ -130,25 +121,8 @@ if page == 'About':
     expander.markdown("- The data should be displayed in an understandable, relevant, and useful format, such as through charts and maps, on a, interactive website dedicated to this.")
 
 elif page == 'Interactive Map':
-    # # streamlit multiselect widget
-    # layer1 = st.multiselect('Layer Selection', [choro, choro_0, scatt], format_func=lambda x: 'cluster_0' if x==scatt else choro)
-    # # assign Graph Objects figure
-    # fig.add_trace(go.Scattermapbox(
-    #     text= clusters_names,
-    #     hoverinfo='all',
-    #     lat=Lat,
-    #     lon=Long,
-    #     mode='markers',
-    #     marker=go.scattermapbox.Marker(
-    #         size=17,
-    #         color='rgb(255, 0, 0)',
-    #         opacity=0.7
-    #     )
-    # ))
-
     updatemenus=list([
         # drop-down 1: map styles menu
-        # buttons containes as many dictionaries as many alternative map styles I want to offer
         dict(
             buttons=list([
                 dict(
@@ -187,11 +161,8 @@ elif page == 'Interactive Map':
             font = dict(size=11)
         ),    
         
-        # drop-down 2: select type of storm event to visualize
+        # drop-down 2: select type of event event to visualize
         dict(
-            # for each button I specify which dictionaries of my data list I want to visualize. Remember I have 7 different
-            # types of storms but I have 8 options: the first will show all of them, while from the second to the last option, only
-            # one type at the time will be shown on the map
             buttons=list([
                 dict(label = 'All Clusters',
                     method = 'update',
@@ -238,6 +209,3 @@ elif page == 'Interactive Map':
     layout['updatemenus'] = updatemenus
 
     st.plotly_chart(fig, use_container_width = True)
-    # fig = go.Figure(data=layer1, layout=layout)
-    # # display streamlit map
-    # st.plotly_chart(fig)
