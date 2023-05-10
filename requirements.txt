@@ -3,7 +3,3 @@ streamlit
 plotly
 numpy
 geopandas
-json
-shapely
-nltk
-matplotlib
