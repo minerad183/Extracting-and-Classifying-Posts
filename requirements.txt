@@ -2,7 +2,6 @@ scikit-learn
 streamlit
 plotly
 numpy
-re
 geopandas
 pickle
 json
