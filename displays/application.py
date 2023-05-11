@@ -207,8 +207,7 @@ def cluster_display_function(text_values):
     elif preds[-1] == 2:
         st.header('''The Siege of Mariupol''')
         st.write("""Cluster 2: The Siege of Mariupol. This cluster is directly related to activities around the siege of the city of Mariupol. It is geographically focused on the city, and the timeline of events back it up. The siege was initiated early on in the conflict, was reported on as the city was bombed and assaulted by Russian soldiers, and then eventually activity lulled when the Ukrainian soldiers surrendered. Recently activity spiked due to Russian President Vladimir Putin visiting the city in March 2023. There is predicted to be little activity in this cluster, though if activity in this cluster picks up it might be indicative of a Ukrainian push to retake the city.""")
-        img = Image.open('assets/clust2_mariupol_wc_f.png')
-        st.image(img, caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://github.com/minerad183/Extracting-and-Clustering-Posts/blob/main/displays/assets/clust2_mariupol_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
     elif preds[-1] == 3:
         st.header('''The Destruction Cluster''')
         st.write("""Cluster 3: The Destruction Cluster. This cluster is focused on destruction wrought by both Russia and Ukraine, as the geographic locations, presumably locations of shelling and other attacks, of these activities are contained largely within Ukraine and Russia. This cluster seems to be related to offenses taken by either side, as well as lulls in fighting as artillery and materiel supplies dwindle. There has recently been an increase in activity in this cluster, as Russia had initiated an offensive in the Donbas region of Ukraine.""")
