@@ -12,7 +12,8 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
-from PIL import Image
+import datetime as dt
+
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -22,6 +23,8 @@ clusters_df = pd.read_csv('./data/get_geoconfirmed_data_clusters.csv', encoding=
 clusters_df['geometry'] = clusters_df.apply(lambda row: shapely.Point(row['longitude'], row['latitude']), axis=1)
 clusters_df = gpd.GeoDataFrame(clusters_df, geometry='geometry')
 clusters_df = clusters_df.set_crs("EPSG:4326", allow_override=True)
+activity_counts_df = pd.read_csv('./data/activity_counts.csv', encoding="utf-8")
+activity_counts_df.reset_index(inplace = True)
 # define lat, long for points
 Lat = clusters_df['latitude']
 Long = clusters_df['longitude']
@@ -161,8 +164,6 @@ def review_to_wordlist(review, remove_stopwords=True):
     # Return a list of words
     return(review_text)
 
-
-
 # Define the model prediction function and return display here
 def cluster_display_function(text_values):
     #Clean the text
@@ -199,31 +200,60 @@ def cluster_display_function(text_values):
     if preds[-1] == 0:
         st.header('''Russian Movements and Activities''')
         st.write("""Cluster 0: Russian Movements and Activities. This cluster is focused on Russian movements, troops, and vehicles, inside Ukraine, Russia, and Belarus. This cluster is predictive in the long-term, as announcements or observations of movement are reported on early on, and again reported once the movement has taken place, typically at least a week out. This cluster is helpful to look at as a precursor to offenses, as spikes in activities are associated with Russian mobilizations and deployments.""")
-        st.image('assets/clust0_movements_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://i.imgur.com/xqq4thv.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.subheader("""Social media posts per day in this cluster""")        
+        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_0'])])
+        st.plotly_chart(fig, use_container_width = True)
     elif preds[-1] == 1:
         st.header('''Global Russian and Ukrainian Activities''')
         st.write("""Cluster 1: Global Russian and Ukrainian Activities. This cluster has the most amount of posts in it, has a much more global dispersal, and is more generalizable, focused on Russian and Ukrainian-related activities writ-large. This cluster's activity has stayed relatively consistent since November 2022, at a lower level than previously. It will be interesting if other clusters evolve to envelop more of the data as the conflict continues.""")
-        st.image('assets/clust1_globalactivities_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://i.imgur.com/Envz47G.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.subheader("""Social media posts per day in this cluster""")        
+        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_1'])])
+        st.plotly_chart(fig, use_container_width = True)
     elif preds[-1] == 2:
         st.header('''The Siege of Mariupol''')
         st.write("""Cluster 2: The Siege of Mariupol. This cluster is directly related to activities around the siege of the city of Mariupol. It is geographically focused on the city, and the timeline of events back it up. The siege was initiated early on in the conflict, was reported on as the city was bombed and assaulted by Russian soldiers, and then eventually activity lulled when the Ukrainian soldiers surrendered. Recently activity spiked due to Russian President Vladimir Putin visiting the city in March 2023. There is predicted to be little activity in this cluster, though if activity in this cluster picks up it might be indicative of a Ukrainian push to retake the city.""")
-        st.image('https://github.com/minerad183/Extracting-and-Clustering-Posts/blob/main/displays/assets/clust2_mariupol_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://i.imgur.com/MTDq9M2.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_2'])])
+        st.subheader("""Social media posts per day in this cluster""")        
+        st.plotly_chart(fig, use_container_width = True)
     elif preds[-1] == 3:
         st.header('''The Destruction Cluster''')
         st.write("""Cluster 3: The Destruction Cluster. This cluster is focused on destruction wrought by both Russia and Ukraine, as the geographic locations, presumably locations of shelling and other attacks, of these activities are contained largely within Ukraine and Russia. This cluster seems to be related to offenses taken by either side, as well as lulls in fighting as artillery and materiel supplies dwindle. There has recently been an increase in activity in this cluster, as Russia had initiated an offensive in the Donbas region of Ukraine.""")
-        st.image('assets/clust3_destruction_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://i.imgur.com/cehnMGs.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.subheader("""Social media posts per day in this cluster""")        
+        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_3'])])
+        st.plotly_chart(fig, use_container_width = True)
     elif preds[-1] == 4:
         st.header('''Ukrainian Positions and Activities''')
         st.write("""Cluster 4: Ukrainian Positions and Activities. This cluster is focused on what Ukraine is doing in its battle plans. Activities related to troop movements, positioning, and UAV flights. Geographically the locations of the activities are focused in Eastern Ukraine, as there is a focus on defending the Donbas region. Previous spikes in activity have occurred when Ukraine was moving troops to retake parts of the country. Notably, this cluster has seen a significant decrease in activity recently, but very likely any increase in activity in this cluster means a possible Ukrainian counteroffensive.""")
-        st.image('assets/clust4_ukrposact_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://i.imgur.com/oSzS78r.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.subheader("""Social media posts per day in this cluster""")        
+        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_4'])])
+        st.plotly_chart(fig, use_container_width = True)
     elif preds[-1] == 5:
         st.header('''Battle for Bakhmut''')
         st.write("""Cluster 5: Battle for Bakhmut. This cluster is focused on the Donbas, specifically the Donetsk Oblast in Ukraine. It is primarily concerned with activities around the besieged city, which has seen intense fighting since the late Fall, as Russia has focused its efforts on taking this city. It has very recently seen a massive spike in activity, as Russia's offsensive and Ukraine's fierce defense has resulted in the most active part of the conflict right now. Continued increase in this cluster is going to be indicative of intense fighting for the city. If this cluster decreases, it likely means the city has been taken over or is on the verge of being taken over by either side.""")
-        st.image('assets/clust5_battlebakhmut_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://i.imgur.com/CmJflm4.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.subheader("""Social media posts per day in this cluster""")        
+        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_5'])])
+        st.plotly_chart(fig, use_container_width = True)
     elif preds[-1] == 6:
         st.header('''Satellite Imagery''')
         st.write("""Cluster 6: Satellite Imagery. This cluster is focused all over Ukraine and in neighboring countries, and is associated with images and reporting that uses satellite imagery. There have been noteworthy spikes in this cluster since the conflict began, and seems to be indicative of potential uncovering of human rights abuses and atrocities. For example, there was a spike of activity in April 2022, when satellite imagery was used to uncover human rights abuses in the city of Bucha outside Kyiv. This was again repeated in November of 2022, when Ukraine concluded its counteroffensive and took back territory in Kherson and Kharkiv, and again satellite imagery helped uncover evidence of atrocities in the towns formerly controlled by the Russian forces. There has been a lull in this cluster recently, but any increase in activity in this cluster might be indicative of using satellite imagery to document cases of activities that journalists or people keyed in to social media cannot get to.""")
-        st.image('assets/clust6_satelliteimagery_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.image('https://i.imgur.com/vv9QClc.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+        st.subheader("""Social media posts per day in this cluster""")
+        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_6'])])
+        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
+        fig.add_annotation(x='Apr 13, 2022', y=23,
+            text="Russia retreated from <br> north and northeast Ukraine",
+            showarrow=True)
+        fig.add_annotation(x='Jan 5, 2023', y=31,
+            text="Imagery uncovered human rights abuses <br> in areas Ukraine retook",
+            showarrow=True)
+        fig.update_layout(showlegend=False)
+        st.plotly_chart(fig, use_container_width = True)
         #Plot number of posts by cluster
     plt.figure(figsize=(10,10))
     preds_df.groupby('Prediction').size().sort_values(ascending=False).plot.bar()
@@ -252,11 +282,11 @@ if page == 'About':
     st.write('''Russia's February 2022 invasion of Ukraine marked the end of a two-decade peace in Europe, and is the largest land war in Europe since World War II. This war is also one of the first instances of a war fought in the social media and information space, as well. With the number of smart phones and people connected to the internet, both in Ukraine and around the world, the Russia-Ukraine conflict has been cataloged like no other war before it. Now media organizations are not the only ones covering the war, everyday people can do it by just taking a picture or a video and posting it to social media sites like Twitter, or Telegram. Whole ecosystems have sprouted up to facilitate it, such as individual users on Twitter aggregating media posts, to loosely moderated threads on message boards like Reddit.''')
     st.write('''There are also non-government organizations trawling through social media and capturing as much information about the posts. Analysts employed by these organizations use their skills and expertise to construct narratives and fill in the gaps that the data from social media might have missed. In many cases, these organizations are also making their data freely available to other organizations and governments for their own use. Some examples of these organizations are Bellingcat, Texty.ua, C4ADS, and @GeoConfirmed. These disparate organizations are using similar sources to analyze and display their data, but data may be missed by one or more. That is why it is imperative to utilize all that is out there to obtain a complete picture to track the conflict.''')
     st.write('''Social media data represents a necessary component of Ukraine battle tracking. With all of these organizations doing the hard part of tracking and gathering the data, it falls on other groups to analyze the data in a meaningful way. There currently exist a few problems that this capstone project hopes to rectify:''')
-    expander  = st.expander('Expand')
+    expander  = st.expander('Expand for problems to address')
     expander.markdown("- The data are not made available in a one-stop-shop location, and require data science expertise to gather, extract-transfer-load, and store.")
     expander.markdown("- The way the data are collected and labeled is not standardized across different sources, and need to be standardized in a more digestable format.")
     expander.markdown("- The data and its contents can be analyzed more holistically, across space and time, and models built out of it.")
-    expander.markdown("- The data should be displayed in an understandable, relevant, and useful format, such as through charts and maps, on a, interactive website dedicated to this.")
+    expander.markdown("- The data should be displayed in an understandable, relevant, and useful format, such as through charts and maps, on an interactive website dedicated to this.")
 
 elif page == 'Interactive Map':
     updatemenus=list([
