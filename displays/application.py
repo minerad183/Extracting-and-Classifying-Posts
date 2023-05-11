@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import geopandas as gpd
 import pickle
-import os
-import pyproj
 import plotly.graph_objs as go
 import json
 import shapely
@@ -14,6 +12,7 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
+from PIL import Image
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -200,24 +199,32 @@ def cluster_display_function(text_values):
     if preds[-1] == 0:
         st.header('''Russian Movements and Activities''')
         st.write("""Cluster 0: Russian Movements and Activities. This cluster is focused on Russian movements, troops, and vehicles, inside Ukraine, Russia, and Belarus. This cluster is predictive in the long-term, as announcements or observations of movement are reported on early on, and again reported once the movement has taken place, typically at least a week out. This cluster is helpful to look at as a precursor to offenses, as spikes in activities are associated with Russian mobilizations and deployments.""")
+        st.image('assets/clust0_movements_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
     elif preds[-1] == 1:
         st.header('''Global Russian and Ukrainian Activities''')
         st.write("""Cluster 1: Global Russian and Ukrainian Activities. This cluster has the most amount of posts in it, has a much more global dispersal, and is more generalizable, focused on Russian and Ukrainian-related activities writ-large. This cluster's activity has stayed relatively consistent since November 2022, at a lower level than previously. It will be interesting if other clusters evolve to envelop more of the data as the conflict continues.""")
+        st.image('assets/clust1_globalactivities_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
     elif preds[-1] == 2:
         st.header('''The Siege of Mariupol''')
         st.write("""Cluster 2: The Siege of Mariupol. This cluster is directly related to activities around the siege of the city of Mariupol. It is geographically focused on the city, and the timeline of events back it up. The siege was initiated early on in the conflict, was reported on as the city was bombed and assaulted by Russian soldiers, and then eventually activity lulled when the Ukrainian soldiers surrendered. Recently activity spiked due to Russian President Vladimir Putin visiting the city in March 2023. There is predicted to be little activity in this cluster, though if activity in this cluster picks up it might be indicative of a Ukrainian push to retake the city.""")
+        img = Image.open('assets/clust2_mariupol_wc_f.png')
+        st.image(img, caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
     elif preds[-1] == 3:
         st.header('''The Destruction Cluster''')
         st.write("""Cluster 3: The Destruction Cluster. This cluster is focused on destruction wrought by both Russia and Ukraine, as the geographic locations, presumably locations of shelling and other attacks, of these activities are contained largely within Ukraine and Russia. This cluster seems to be related to offenses taken by either side, as well as lulls in fighting as artillery and materiel supplies dwindle. There has recently been an increase in activity in this cluster, as Russia had initiated an offensive in the Donbas region of Ukraine.""")
+        st.image('assets/clust3_destruction_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
     elif preds[-1] == 4:
         st.header('''Ukrainian Positions and Activities''')
         st.write("""Cluster 4: Ukrainian Positions and Activities. This cluster is focused on what Ukraine is doing in its battle plans. Activities related to troop movements, positioning, and UAV flights. Geographically the locations of the activities are focused in Eastern Ukraine, as there is a focus on defending the Donbas region. Previous spikes in activity have occurred when Ukraine was moving troops to retake parts of the country. Notably, this cluster has seen a significant decrease in activity recently, but very likely any increase in activity in this cluster means a possible Ukrainian counteroffensive.""")
+        st.image('assets/clust4_ukrposact_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
     elif preds[-1] == 5:
         st.header('''Battle for Bakhmut''')
         st.write("""Cluster 5: Battle for Bakhmut. This cluster is focused on the Donbas, specifically the Donetsk Oblast in Ukraine. It is primarily concerned with activities around the besieged city, which has seen intense fighting since the late Fall, as Russia has focused its efforts on taking this city. It has very recently seen a massive spike in activity, as Russia's offsensive and Ukraine's fierce defense has resulted in the most active part of the conflict right now. Continued increase in this cluster is going to be indicative of intense fighting for the city. If this cluster decreases, it likely means the city has been taken over or is on the verge of being taken over by either side.""")
+        st.image('assets/clust5_battlebakhmut_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
     elif preds[-1] == 6:
         st.header('''Satellite Imagery''')
         st.write("""Cluster 6: Satellite Imagery. This cluster is focused all over Ukraine and in neighboring countries, and is associated with images and reporting that uses satellite imagery. There have been noteworthy spikes in this cluster since the conflict began, and seems to be indicative of potential uncovering of human rights abuses and atrocities. For example, there was a spike of activity in April 2022, when satellite imagery was used to uncover human rights abuses in the city of Bucha outside Kyiv. This was again repeated in November of 2022, when Ukraine concluded its counteroffensive and took back territory in Kherson and Kharkiv, and again satellite imagery helped uncover evidence of atrocities in the towns formerly controlled by the Russian forces. There has been a lull in this cluster recently, but any increase in activity in this cluster might be indicative of using satellite imagery to document cases of activities that journalists or people keyed in to social media cannot get to.""")
+        st.image('assets/clust6_satelliteimagery_wc_f.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
         #Plot number of posts by cluster
     plt.figure(figsize=(10,10))
     preds_df.groupby('Prediction').size().sort_values(ascending=False).plot.bar()
