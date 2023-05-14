@@ -8,4 +8,4 @@ shapely
 nltk
 datetime
 matplotlib
-nltk.download('stopwords')
+nltk.corpus
