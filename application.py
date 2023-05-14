@@ -6,13 +6,15 @@ import plotly.graph_objs as go
 import json
 import shapely
 import streamlit.components.v1 as components
-from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 import datetime as dt
+
+
+
 # import boto3
 # import boto3.session
 
@@ -21,7 +23,7 @@ import datetime as dt
 # SECRET_KEY = cred.secret_key
 # SESSION_TOKEN = cred.token  ## optional
 
-# st.set_option('deprecation.showPyplotGlobalUse', False)
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # s3client = boto3.client('s3', 
 #                         aws_access_key_id = ACCESS_KEY, 
@@ -55,13 +57,32 @@ mapboxtoken = 'pk.eyJ1IjoibWluZXJhZCIsImEiOiJjbGhnYm5nZGEwM2JjM3FwbjBnbnN4cHQ4In
 
 
 # Stopword removal
-stpwrd = stopwords.words('english')
+stpwrd = ['i', 'me', 'my','myself','we','our','ours','ourselves','you','you''re',
+"you've","you'll","you'd","your",'yours',"yourself","yourselves",'he',
+"him","his","himself","she","she's","her","hers","herself",
+"it","it's","its","itself","they","them","their",'theirs',
+"themselves",'what',"which","who","whom",'this',"that","that'll","these","those",'am',"is",
+"are","was","were","be","been","being","have","has",
+"had",'having',"do","does","did","doing","a","an",
+"the","and","but","if","or",'because',"as","until",
+"while","of","at","by","for","with","about","against",
+"between","into","through","during","before","after","above","below",
+"to","from","up","down","in","out","on","off",
+"over","under","again","further","then","once","here","there",
+"when","where","why","how","all","any","both","each",
+"few","more","most","other","some","such","no","nor",
+"not","only","own","same",'so',"than","too","very",
+"s","t","can","will","just","don","don't",
+"should","should've","now","d","ll","m","o","re",
+"ve","y","ain","aren","aren't","couldn","couldn't","didn","didn't","doesn",
+"doesn't","hadn","hadn't","hasn","hasn't","haven","haven't","isn",
+"isn't","ma","mightn","mightn't","mustn","mustn't","needn","needn't",
+"shan","shan't","shouldn","shouldn't","wasn","wasn't","weren","weren't","won","won't","wouldn","wouldn't"]
 new_stopwords = ["twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
                  'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
                 'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
                 'õ', 'ð', 'ã', 'Ý', 'Ü', 'Û', 'Ú', 'Ù', 'Ï', 'Î', 'Í', 'Ì', 'Ë', 'Ê', 'É', 'È', 'Å', 'Ä', 'Ã', 'Â', 'Á', 'À', 'Ö', 'Õ', 'Ô','Ó', 'Ò',
                 'ÂƒÆ', 'â', 'Âƒâ', 'šâ', 'šÂ', 'Ž', 'žÂ', 'ÃƒÆ', 'Ãƒâ', 'ƒ', 'šÃ'  ] #add update to this
-stpwrd.extend(new_stopwords)
 
 #Define a word cleaning function
 def review_to_wordlist(review, remove_stopwords=True):
