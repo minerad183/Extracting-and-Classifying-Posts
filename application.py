@@ -11,6 +11,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 import datetime as dt
+import scipy
 
 
 
