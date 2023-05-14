@@ -8,4 +8,3 @@ shapely
 nltk
 datetime
 matplotlib
-nltk.corpus
