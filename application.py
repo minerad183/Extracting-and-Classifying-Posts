@@ -57,69 +57,69 @@ mapboxtoken = 'pk.eyJ1IjoibWluZXJhZCIsImEiOiJjbGhnYm5nZGEwM2JjM3FwbjBnbnN4cHQ4In
 
 
 # Stopword removal
-stpwrd = ['i', 'me', 'my','myself','we','our','ours','ourselves','you','you''re',
-"you've","you'll","you'd","your",'yours',"yourself","yourselves",'he',
-"him","his","himself","she","she's","her","hers","herself",
-"it","it's","its","itself","they","them","their",'theirs',
-"themselves",'what',"which","who","whom",'this',"that","that'll","these","those",'am',"is",
-"are","was","were","be","been","being","have","has",
-"had",'having',"do","does","did","doing","a","an",
-"the","and","but","if","or",'because',"as","until",
-"while","of","at","by","for","with","about","against",
-"between","into","through","during","before","after","above","below",
-"to","from","up","down","in","out","on","off",
-"over","under","again","further","then","once","here","there",
-"when","where","why","how","all","any","both","each",
-"few","more","most","other","some","such","no","nor",
-"not","only","own","same",'so',"than","too","very",
-"s","t","can","will","just","don","don't",
-"should","should've","now","d","ll","m","o","re",
-"ve","y","ain","aren","aren't","couldn","couldn't","didn","didn't","doesn",
-"doesn't","hadn","hadn't","hasn","hasn't","haven","haven't","isn",
-"isn't","ma","mightn","mightn't","mustn","mustn't","needn","needn't",
-"shan","shan't","shouldn","shouldn't","wasn","wasn't","weren","weren't","won","won't","wouldn","wouldn't", "twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
-                 'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
-                'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
-                'õ', 'ð', 'ã', 'Ý', 'Ü', 'Û', 'Ú', 'Ù', 'Ï', 'Î', 'Í', 'Ì', 'Ë', 'Ê', 'É', 'È', 'Å', 'Ä', 'Ã', 'Â', 'Á', 'À', 'Ö', 'Õ', 'Ô','Ó', 'Ò',
-                'ÂƒÆ', 'â', 'Âƒâ', 'šâ', 'šÂ', 'Ž', 'žÂ', 'ÃƒÆ', 'Ãƒâ', 'ƒ', 'šÃ'  ]
-new_stopwords = ["twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
-                 'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
-                'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
-                'õ', 'ð', 'ã', 'Ý', 'Ü', 'Û', 'Ú', 'Ù', 'Ï', 'Î', 'Í', 'Ì', 'Ë', 'Ê', 'É', 'È', 'Å', 'Ä', 'Ã', 'Â', 'Á', 'À', 'Ö', 'Õ', 'Ô','Ó', 'Ò',
-                'ÂƒÆ', 'â', 'Âƒâ', 'šâ', 'šÂ', 'Ž', 'žÂ', 'ÃƒÆ', 'Ãƒâ', 'ƒ', 'šÃ'  ] #add update to this
+# stpwrd = ['i', 'me', 'my','myself','we','our','ours','ourselves','you','you''re',
+# "you've","you'll","you'd","your",'yours',"yourself","yourselves",'he',
+# "him","his","himself","she","she's","her","hers","herself",
+# "it","it's","its","itself","they","them","their",'theirs',
+# "themselves",'what',"which","who","whom",'this',"that","that'll","these","those",'am',"is",
+# "are","was","were","be","been","being","have","has",
+# "had",'having',"do","does","did","doing","a","an",
+# "the","and","but","if","or",'because',"as","until",
+# "while","of","at","by","for","with","about","against",
+# "between","into","through","during","before","after","above","below",
+# "to","from","up","down","in","out","on","off",
+# "over","under","again","further","then","once","here","there",
+# "when","where","why","how","all","any","both","each",
+# "few","more","most","other","some","such","no","nor",
+# "not","only","own","same",'so',"than","too","very",
+# "s","t","can","will","just","don","don't",
+# "should","should've","now","d","ll","m","o","re",
+# "ve","y","ain","aren","aren't","couldn","couldn't","didn","didn't","doesn",
+# "doesn't","hadn","hadn't","hasn","hasn't","haven","haven't","isn",
+# "isn't","ma","mightn","mightn't","mustn","mustn't","needn","needn't",
+# "shan","shan't","shouldn","shouldn't","wasn","wasn't","weren","weren't","won","won't","wouldn","wouldn't", "twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
+#                  'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
+#                 'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
+#                 'õ', 'ð', 'ã', 'Ý', 'Ü', 'Û', 'Ú', 'Ù', 'Ï', 'Î', 'Í', 'Ì', 'Ë', 'Ê', 'É', 'È', 'Å', 'Ä', 'Ã', 'Â', 'Á', 'À', 'Ö', 'Õ', 'Ô','Ó', 'Ò',
+#                 'ÂƒÆ', 'â', 'Âƒâ', 'šâ', 'šÂ', 'Ž', 'žÂ', 'ÃƒÆ', 'Ãƒâ', 'ƒ', 'šÃ'  ]
+# new_stopwords = ["twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
+#                  'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
+#                 'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
+#                 'õ', 'ð', 'ã', 'Ý', 'Ü', 'Û', 'Ú', 'Ù', 'Ï', 'Î', 'Í', 'Ì', 'Ë', 'Ê', 'É', 'È', 'Å', 'Ä', 'Ã', 'Â', 'Á', 'À', 'Ö', 'Õ', 'Ô','Ó', 'Ò',
+#                 'ÂƒÆ', 'â', 'Âƒâ', 'šâ', 'šÂ', 'Ž', 'žÂ', 'ÃƒÆ', 'Ãƒâ', 'ƒ', 'šÃ'  ] #add update to this
 
-#Define a word cleaning function
-def review_to_wordlist(review, remove_stopwords=True):
-    # Clean the text, with the option to remove stopwords.
+# #Define a word cleaning function
+# def review_to_wordlist(review, remove_stopwords=True):
+#     # Clean the text, with the option to remove stopwords.
     
-    # Convert words to lower case and split them
-    words = review.lower().split()
+#     # Convert words to lower case and split them
+#     words = review.lower().split()
 
-    # Optionally remove stop words (true by default)
-    if remove_stopwords:
-        words = [w for w in words if not w in stpwrd]
+#     # Optionally remove stop words (true by default)
+#     if remove_stopwords:
+#         words = [w for w in words if not w in stpwrd]
     
-    review_text = " ".join(words)
+#     review_text = " ".join(words)
 
-    # Clean the text
-    review_text = re.sub(r"[^A-Za-z0-9(),!.?\'\`]", " ", review_text)
-    review_text = re.sub(r"\'s", " 's ", review_text)
-    review_text = re.sub(r"\'ve", " 've ", review_text)
-    review_text = re.sub(r"n\'t", " 't ", review_text)
-    review_text = re.sub(r"\'re", " 're ", review_text)
-    review_text = re.sub(r"\'d", " 'd ", review_text)
-    review_text = re.sub(r"\'ll", " 'll ", review_text)
-    review_text = re.sub(r",", " ", review_text)
-    review_text = re.sub(r"\.", " ", review_text)
-    review_text = re.sub(r"!", " ", review_text)
-    review_text = re.sub(r"\(", " ( ", review_text)
-    review_text = re.sub(r"\)", " ) ", review_text)
-    review_text = re.sub(r"\?", " ", review_text)
-    review_text = re.sub(r"\s{2,}", " ", review_text)
-    review_text = re.sub(r"\s{2,}", " ", review_text)
-    for i in new_stopwords:
-        review_text = re.sub(i, " ", review_text)
-    words = review_text.split()
+#     # Clean the text
+#     review_text = re.sub(r"[^A-Za-z0-9(),!.?\'\`]", " ", review_text)
+#     review_text = re.sub(r"\'s", " 's ", review_text)
+#     review_text = re.sub(r"\'ve", " 've ", review_text)
+#     review_text = re.sub(r"n\'t", " 't ", review_text)
+#     review_text = re.sub(r"\'re", " 're ", review_text)
+#     review_text = re.sub(r"\'d", " 'd ", review_text)
+#     review_text = re.sub(r"\'ll", " 'll ", review_text)
+#     review_text = re.sub(r",", " ", review_text)
+#     review_text = re.sub(r"\.", " ", review_text)
+#     review_text = re.sub(r"!", " ", review_text)
+#     review_text = re.sub(r"\(", " ( ", review_text)
+#     review_text = re.sub(r"\)", " ) ", review_text)
+#     review_text = re.sub(r"\?", " ", review_text)
+#     review_text = re.sub(r"\s{2,}", " ", review_text)
+#     review_text = re.sub(r"\s{2,}", " ", review_text)
+#     for i in new_stopwords:
+#         review_text = re.sub(i, " ", review_text)
+#     words = review_text.split()
     
     # # Shorten words to their stems
     # stemmer = SnowballStemmer('english', ignore_stopwords = True)
@@ -128,7 +128,7 @@ def review_to_wordlist(review, remove_stopwords=True):
     # review_text = " ".join(stemmed_words)
     
     # Return a list of words
-    return(review_text)
+    # return(review_text)
 
 # Define a bollinger band requirement for clustered line graphs: https://albertum.medium.com/plotting-bollinger-bands-with-plotly-graph-objects-1c7172899542
 def clustered_bollinger_bands(cluster_number):
@@ -174,216 +174,216 @@ ukr_centroids['lon'] = ukr_centroids['geometry'].apply(lambda geom: geom.x)
 ukr_centroids['clust'] = [i for i in range(0, 7)]
 # Center of Mass setup
 def center_of_mass_plot(cluster_number):
-        marker_colors = {0: 'rgb(255, 195, 127)', 1: 'rgb(127, 179, 228)',
+    marker_colors = {0: 'rgb(255, 195, 127)', 1: 'rgb(127, 179, 228)',
                         2: 'rgb(190, 247, 208)', 3: 'rgb(255, 213, 213)',
                         4: 'rgb(193, 228, 255)', 5: 'rgb(255, 149, 149)',
                         6: 'rgb(148, 215, 206)'}
-        layout_com = dict(title_text ='Center of Mass Map of this Cluster', title_x =0.5,  
+    layout_com = dict(title_text ='Center of Mass Map of this Cluster', title_x =0.5,  
             width=950, height=700,mapbox = dict(center= dict(lat=47,  
             lon=35), accesstoken= mapboxtoken, zoom=4,style="carto-positron"))
-        traces = []
-        Lat = []
-        Lon = []
-        Clust = []
-        for index, row in ukr_centroids.iterrows():
-            lat = row['lat']
-            lon = row['lon']
-            clust = row['clust']
+    traces = []
+    Lat = []
+    Lon = []
+    Clust = []
+    for index, row in ukr_centroids.iterrows():
+        lat = row['lat']
+        lon = row['lon']
+        clust = row['clust']
 
-            if row['clust'] == cluster_number:
-                marker_color = marker_colors.get(cluster_number)
-            else:
-                marker_color = 'rgb(128,128,128)'
+        if row['clust'] == cluster_number:
+            marker_color = marker_colors.get(cluster_number)
+        else:
+            marker_color = 'rgb(128,128,128)'
             
-            Lat.append(lat)
-            Lon.append(lon)
-            traces.append(marker_color)
-            Clust.append(clust)
+        Lat.append(lat)
+        Lon.append(lon)
+        traces.append(marker_color)
+        Clust.append(clust)
         
-        trace = go.Scattermapbox(showlegend = True, lat = Lat, lon = Lon, mode = 'markers', 
-                                marker = dict(size = 12, color = traces), name = f'Cluster {cluster_number}', hovertemplate='Latitude: %{lat} <br> Longitude: %{lon} <extra></extra>')
-        fig = go.Figure(data = trace, layout = layout_com)
-        st.plotly_chart(fig, use_container_width = True)
-# Define the model prediction function and return display here
-def cluster_display_function(text_values):
-    #Clean the text
-    vect_text = review_to_wordlist(text_values, remove_stopwords=True)
-    if input_text is not None:
-        st.write('Progress: returning your cleaned up text...')
-    st.write(review_to_wordlist(text_values, remove_stopwords=True))
-    # I don't understand why, but I need to basically have a corpus of data to fit and then predict the model, so the pickle is almost useless...
-    postfeatures = []
-    for i in clusters_df['list_text']:
-        postfeatures.append(review_to_wordlist(i, remove_stopwords=True))
-    y =  clusters_df['clusters']
-    # response = s3client.get_object(Bucket='clusteringappdevfolder', Key='https://clusteringappdevfolder.s3.amazonaws.com/data/vectorizer.pkl')
-    # body = response['Body'].read()
-    # vectorizer = pickle.loads(body)
-    model = pd.read_pickle('https://clusteringappdevfolder.s3.amazonaws.com/data/vectorizer.pkl')    
-    vectorizer = TfidfVectorizer(stop_words=stpwrd)
-    X = vectorizer.fit_transform(postfeatures)
-    #Next, fit the text into the classifier model
-    # response = s3client.get_object(Bucket='clusteringappdevfolder', Key='https://clusteringappdevfolder.s3.amazonaws.com/data/class_model.pkl')
-    # body = response['Body'].read()
-    # model = pickle.loads(body)
-    model = pd.read_pickle('https://clusteringappdevfolder.s3.amazonaws.com/data/class_model.pkl')
-    model.fit(X, y)
-    #Append the vect_text into the postfeatures space and then use the model predict on it - call the last entry
-    #Drop word if it does not appear in current postfeatures list (otherwise the model gets messed up)
-    processing_text = vect_text.split()
-    word_list = [word for sentence in postfeatures for word in sentence.split()]
-    processing_text = [word for word in processing_text if word in word_list]
-    processing_text = ' '.join(processing_text)
-    postfeatures.append(processing_text)
-    vector_text = vectorizer.fit_transform(postfeatures)
-    preds = model.predict(vector_text)
-    preds_df = pd.DataFrame({'Postfeatures': postfeatures, 'Prediction': preds})
-    txt_df = pd.DataFrame(data = {'Input Text' : text_values}, index=[0])
-    txt_df['Cluster'] = preds[-1]
-    st.write(txt_df)
+    trace = go.Scattermapbox(showlegend = True, lat = Lat, lon = Lon, mode = 'markers', 
+                            marker = dict(size = 12, color = traces), name = f'Cluster {cluster_number}', hovertemplate='Latitude: %{lat} <br> Longitude: %{lon} <extra></extra>')
+    fig = go.Figure(data = trace, layout = layout_com)
+    st.plotly_chart(fig, use_container_width = True)
+# # Define the model prediction function and return display here
+# def cluster_display_function(text_values):
+#     #Clean the text
+#     vect_text = review_to_wordlist(text_values, remove_stopwords=True)
+#     if input_text is not None:
+#         st.write('Progress: returning your cleaned up text...')
+#     st.write(review_to_wordlist(text_values, remove_stopwords=True))
+#     # I don't understand why, but I need to basically have a corpus of data to fit and then predict the model, so the pickle is almost useless...
+#     postfeatures = []
+#     for i in clusters_df['list_text']:
+#         postfeatures.append(review_to_wordlist(i, remove_stopwords=True))
+#     y =  clusters_df['clusters']
+#     # response = s3client.get_object(Bucket='clusteringappdevfolder', Key='https://clusteringappdevfolder.s3.amazonaws.com/data/vectorizer.pkl')
+#     # body = response['Body'].read()
+#     # vectorizer = pickle.loads(body)
+#     model = pd.read_pickle('https://clusteringappdevfolder.s3.amazonaws.com/data/vectorizer.pkl')    
+#     vectorizer = TfidfVectorizer(stop_words=stpwrd)
+#     X = vectorizer.fit_transform(postfeatures)
+#     #Next, fit the text into the classifier model
+#     # response = s3client.get_object(Bucket='clusteringappdevfolder', Key='https://clusteringappdevfolder.s3.amazonaws.com/data/class_model.pkl')
+#     # body = response['Body'].read()
+#     # model = pickle.loads(body)
+#     model = pd.read_pickle('https://clusteringappdevfolder.s3.amazonaws.com/data/class_model.pkl')
+#     model.fit(X, y)
+#     #Append the vect_text into the postfeatures space and then use the model predict on it - call the last entry
+#     #Drop word if it does not appear in current postfeatures list (otherwise the model gets messed up)
+#     processing_text = vect_text.split()
+#     word_list = [word for sentence in postfeatures for word in sentence.split()]
+#     processing_text = [word for word in processing_text if word in word_list]
+#     processing_text = ' '.join(processing_text)
+#     postfeatures.append(processing_text)
+#     vector_text = vectorizer.fit_transform(postfeatures)
+#     preds = model.predict(vector_text)
+#     preds_df = pd.DataFrame({'Postfeatures': postfeatures, 'Prediction': preds})
+#     txt_df = pd.DataFrame(data = {'Input Text' : text_values}, index=[0])
+#     txt_df['Cluster'] = preds[-1]
+#     st.write(txt_df)
    
-    #Set up graphs and frames that get called when these clusters are returned
-    if preds[-1] == 0:
-        st.header('''Russian Movements and Activities''')
-        st.write("""Cluster 0: Russian Movements and Activities. This cluster is focused on Russian movements, troops, and vehicles, inside Ukraine, Russia, and Belarus. This cluster is predictive in the long-term, as announcements or observations of movement are reported on early on, and again reported once the movement has taken place, typically at least a week out. This cluster is helpful to look at as a precursor to offenses, as spikes in activities are associated with Russian mobilizations and deployments.""")
-        st.image('https://i.imgur.com/xqq4thv.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
-        # Line Graph of activity over time with Bollinger Bands
-        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_0'])])
-        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
-        clustered_bollinger_bands(0)
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
-        fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
-            text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
-            showarrow=True)        
-        fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster") #gets too cluttered with the legend, and the captions and annotations explain it
-        st.plotly_chart(fig, use_container_width = True)
-        st.write("""Spikes in this cluster's post activity refer to the initial Russian
-        invasion in March-April 2022, mobilization announcements in September 2022, and tracking of Russia's 2023 offensive.""")        
-        #"Center of Mass" Map, where the geographic center of the cluster is
-        center_of_mass_plot(0)
-        st.write("""This map shows the average location of the social media posts in this cluster.
-        This cluster has its origins in the heart of the current conflict front. Notably it is being pulled westward because of Russia's initial invasion as well as social media coverage of troop movements within Russia and Belarus.""")
-    elif preds[-1] == 1:
-        st.header('''Global Russian and Ukrainian Activities''')
-        st.write("""Cluster 1: Global Russian and Ukrainian Activities. This cluster has the most amount of posts in it, has a much more global dispersal, and is more generalizable, focused on Russian and Ukrainian-related activities writ-large. This cluster's activity has stayed relatively consistent since November 2022, at a lower level than previously. It will be interesting if other clusters evolve to envelop more of the data as the conflict continues.""")
-        st.image('https://i.imgur.com/Envz47G.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')       
-        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_1'])])
-        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
-        clustered_bollinger_bands(1)
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
-        fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=55,
-            text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
-            showarrow=True)        
-        fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")
-        st.plotly_chart(fig, use_container_width = True)
-        st.write("""This cluster has spiked in the past with major newsworthy information, such as Ukraine's counteroffensives.""")        
-        center_of_mass_plot(1)
-        st.write("""This map shows the average location of the social media posts in this cluster.
-        This cluster is located very close to the current front, but more northward as events are contained within this cluster from inside of Russia.""")
-    elif preds[-1] == 2:
-        st.header('''The Siege of Mariupol''')
-        st.write("""Cluster 2: The Siege of Mariupol. This cluster is directly related to activities around the siege of the city of Mariupol. It is geographically focused on the city, and the timeline of events back it up. The siege was initiated early on in the conflict, was reported on as the city was bombed and assaulted by Russian soldiers, and then eventually activity lulled when the Ukrainian soldiers surrendered. Recently activity spiked due to Russian President Vladimir Putin visiting the city in March 2023. There is predicted to be little activity in this cluster, though if activity in this cluster picks up it might be indicative of a Ukrainian push to retake the city.""")
-        st.image('https://i.imgur.com/MTDq9M2.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')    
-        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_2'])])
-        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
-        clustered_bollinger_bands(2)
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
-        fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
-            text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
-            showarrow=True)        
-        fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")
-        st.plotly_chart(fig, use_container_width = True)
-        st.write("""This cluster had major activity early in the conflict as Russia besieged the city on the coast of the Black Sea.
-        It again saw activity in March of 2023 as posts referencing Russian President Vladimir Putin's trip to the city.""")        
-        center_of_mass_plot(2)
-        st.write("""This map shows the average location of the social media posts in this cluster.
-        The location is almost directly focused on the city of Mariupol, as it was one of the most noteworthy cities to cover in the early phase of the conflict.""")
-    elif preds[-1] == 3:
-        st.header('''The Destruction Cluster''')
-        st.write("""Cluster 3: The Destruction Cluster. This cluster is focused on destruction wrought by both Russia and Ukraine, as the geographic locations, presumably locations of shelling and other attacks, of these activities are contained largely within Ukraine and Russia. This cluster seems to be related to offenses taken by either side, as well as lulls in fighting as artillery and materiel supplies dwindle. There has recently been an increase in activity in this cluster, as Russia had initiated an offensive in the Donbas region of Ukraine.""")
-        st.image('https://i.imgur.com/cehnMGs.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')       
-        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_3'])])
-        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
-        clustered_bollinger_bands(3)
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
-        fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
-            text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
-            showarrow=True)        
-        fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")        
-        st.plotly_chart(fig, use_container_width = True)
-        st.write("""This cluster is indicative of social media activity reporting about destructive actions in both Ukraine and Russia. It has stayed relatively stable since dropping in late-May, 2022.""")
-        center_of_mass_plot(3)
-        st.write("""This map shows the average location of the social media posts in this cluster.
-        This location is focused in central-east Ukraine, as many destruction-related events have been published around the conflict's front, plus in the nearby Russian province of Belgorod.""")
-    elif preds[-1] == 4:
-        st.header('''Ukrainian Positions and Activities''')
-        st.write("""Cluster 4: Ukrainian Positions and Activities. This cluster is focused on what Ukraine is doing in its battle plans. Activities related to troop movements, positioning, and UAV flights. Geographically the locations of the activities are focused in Eastern Ukraine, as there is a focus on defending the Donbas region. Previous spikes in activity have occurred when Ukraine was moving troops to retake parts of the country. Notably, this cluster has seen a significant decrease in activity recently, but very likely any increase in activity in this cluster means a possible Ukrainian counteroffensive.""")
-        st.image('https://i.imgur.com/oSzS78r.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts') 
-        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_4'])])
-        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
-        clustered_bollinger_bands(4)
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
-        fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
-            text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
-            showarrow=True)        
-        fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")        
-        st.plotly_chart(fig, use_container_width = True)
-        st.write("""Spikes in this cluster's post activity refer to the Ukrainian movements to retake lost territorial control. A spike in this cluster may be indicative of news of a Ukrainian counteroffensive.""")                
-        center_of_mass_plot(4)
-        st.write("""This map shows the average location of the social media posts in this cluster.
-        The location is nearby the current conflict's front, notably behind the Ukrainian lines, as this cluster is associated with the side's activities.""")
-    elif preds[-1] == 5:
-        st.header('''Battle for Bakhmut''')
-        st.write("""Cluster 5: Battle for Bakhmut. This cluster is focused on the Donbas, specifically the Donetsk Oblast in Ukraine. It is primarily concerned with activities around the besieged city, which has seen intense fighting since the late Fall, as Russia has focused its efforts on taking this city. It has very recently seen a massive spike in activity, as Russia's offsensive and Ukraine's fierce defense has resulted in the most active part of the conflict right now. Continued increase in this cluster is going to be indicative of intense fighting for the city. If this cluster decreases, it likely means the city has been taken over or is on the verge of being taken over by either side.""")
-        st.image('https://i.imgur.com/CmJflm4.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')     
-        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_5'])])
-        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')        
-        clustered_bollinger_bands(5)
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
-        fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=42,
-            text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
-            showarrow=True)   
-        fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")             
-        st.plotly_chart(fig, use_container_width = True)
-        st.write("""This cluster has seen a massive spike in activity as social media posts about the fight in the Donbas,
-        specifically around the city of Bakhmut. """)
-        center_of_mass_plot(5)
-        st.write("""This map shows the average location of the social media posts in this cluster.
-        The location is nearby the city of Bakhmut, where fighting has been most intense as of April 2023.""")
-    elif preds[-1] == 6:
-        st.header('''Satellite Imagery''')
-        st.write("""Cluster 6: Satellite Imagery. This cluster is focused all over Ukraine and in neighboring countries, and is associated with images and reporting that uses satellite imagery. There have been noteworthy spikes in this cluster since the conflict began, and seems to be indicative of potential uncovering of human rights abuses and atrocities. For example, there was a spike of activity in April 2022, when satellite imagery was used to uncover human rights abuses in the city of Bucha outside Kyiv. This was again repeated in November of 2022, when Ukraine concluded its counteroffensive and took back territory in Kherson and Kharkiv, and again satellite imagery helped uncover evidence of atrocities in the towns formerly controlled by the Russian forces. There has been a lull in this cluster recently, but any increase in activity in this cluster might be indicative of using satellite imagery to document cases of activities that journalists or people keyed in to social media cannot get to.""")
-        st.image('https://i.imgur.com/vv9QClc.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
-        fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_6'])])
-        fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
-        clustered_bollinger_bands(6)
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
-        fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
-        fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31, #I couldn't get annotations to work exactly how I wanted, so I'm pivoting
-            text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
-            showarrow=True)
-        fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")
-        st.plotly_chart(fig, use_container_width = True)
-        st.write("""This cluster's activity spikes when satellite imagery is used in social media posts.
-        Notably, satellite imagery has been used to augment coverage of human rights abuses in Ukraine, and spikes in this cluster have focused on these posts.""")
-        center_of_mass_plot(6)
-        st.write("""This map shows the average location of the social media posts in this cluster.
-        It is more centrally located, as many of the posts are referencing activities along the conflict's front and along the coast of Ukraine.""")        
-    #Plot number of posts by cluster
-    st.subheader('''Here is the breakdown of the number of posts in each cluster''')
-    plt.figure(figsize=(10,10))
-    preds_df.groupby('Prediction').size().sort_values(ascending=False).plot.bar()
-    plt.title('Breakdown of Clusters')
-    plt.xticks(rotation=0)
-    plt.xlabel("Cluster number")
-    plt.ylabel("Number of posts")
-    st.pyplot() 
+#     #Set up graphs and frames that get called when these clusters are returned
+#     if preds[-1] == 0:
+#         st.header('''Russian Movements and Activities''')
+#         st.write("""Cluster 0: Russian Movements and Activities. This cluster is focused on Russian movements, troops, and vehicles, inside Ukraine, Russia, and Belarus. This cluster is predictive in the long-term, as announcements or observations of movement are reported on early on, and again reported once the movement has taken place, typically at least a week out. This cluster is helpful to look at as a precursor to offenses, as spikes in activities are associated with Russian mobilizations and deployments.""")
+#         st.image('https://i.imgur.com/xqq4thv.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+#         # Line Graph of activity over time with Bollinger Bands
+#         fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_0'])])
+#         fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
+#         clustered_bollinger_bands(0)
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
+#         fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
+#             text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
+#             showarrow=True)        
+#         fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster") #gets too cluttered with the legend, and the captions and annotations explain it
+#         st.plotly_chart(fig, use_container_width = True)
+#         st.write("""Spikes in this cluster's post activity refer to the initial Russian
+#         invasion in March-April 2022, mobilization announcements in September 2022, and tracking of Russia's 2023 offensive.""")        
+#         #"Center of Mass" Map, where the geographic center of the cluster is
+#         center_of_mass_plot(0)
+#         st.write("""This map shows the average location of the social media posts in this cluster.
+#         This cluster has its origins in the heart of the current conflict front. Notably it is being pulled westward because of Russia's initial invasion as well as social media coverage of troop movements within Russia and Belarus.""")
+#     elif preds[-1] == 1:
+#         st.header('''Global Russian and Ukrainian Activities''')
+#         st.write("""Cluster 1: Global Russian and Ukrainian Activities. This cluster has the most amount of posts in it, has a much more global dispersal, and is more generalizable, focused on Russian and Ukrainian-related activities writ-large. This cluster's activity has stayed relatively consistent since November 2022, at a lower level than previously. It will be interesting if other clusters evolve to envelop more of the data as the conflict continues.""")
+#         st.image('https://i.imgur.com/Envz47G.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')       
+#         fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_1'])])
+#         fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
+#         clustered_bollinger_bands(1)
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
+#         fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=55,
+#             text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
+#             showarrow=True)        
+#         fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")
+#         st.plotly_chart(fig, use_container_width = True)
+#         st.write("""This cluster has spiked in the past with major newsworthy information, such as Ukraine's counteroffensives.""")        
+#         center_of_mass_plot(1)
+#         st.write("""This map shows the average location of the social media posts in this cluster.
+#         This cluster is located very close to the current front, but more northward as events are contained within this cluster from inside of Russia.""")
+#     elif preds[-1] == 2:
+#         st.header('''The Siege of Mariupol''')
+#         st.write("""Cluster 2: The Siege of Mariupol. This cluster is directly related to activities around the siege of the city of Mariupol. It is geographically focused on the city, and the timeline of events back it up. The siege was initiated early on in the conflict, was reported on as the city was bombed and assaulted by Russian soldiers, and then eventually activity lulled when the Ukrainian soldiers surrendered. Recently activity spiked due to Russian President Vladimir Putin visiting the city in March 2023. There is predicted to be little activity in this cluster, though if activity in this cluster picks up it might be indicative of a Ukrainian push to retake the city.""")
+#         st.image('https://i.imgur.com/MTDq9M2.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')    
+#         fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_2'])])
+#         fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
+#         clustered_bollinger_bands(2)
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
+#         fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
+#             text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
+#             showarrow=True)        
+#         fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")
+#         st.plotly_chart(fig, use_container_width = True)
+#         st.write("""This cluster had major activity early in the conflict as Russia besieged the city on the coast of the Black Sea.
+#         It again saw activity in March of 2023 as posts referencing Russian President Vladimir Putin's trip to the city.""")        
+#         center_of_mass_plot(2)
+#         st.write("""This map shows the average location of the social media posts in this cluster.
+#         The location is almost directly focused on the city of Mariupol, as it was one of the most noteworthy cities to cover in the early phase of the conflict.""")
+#     elif preds[-1] == 3:
+#         st.header('''The Destruction Cluster''')
+#         st.write("""Cluster 3: The Destruction Cluster. This cluster is focused on destruction wrought by both Russia and Ukraine, as the geographic locations, presumably locations of shelling and other attacks, of these activities are contained largely within Ukraine and Russia. This cluster seems to be related to offenses taken by either side, as well as lulls in fighting as artillery and materiel supplies dwindle. There has recently been an increase in activity in this cluster, as Russia had initiated an offensive in the Donbas region of Ukraine.""")
+#         st.image('https://i.imgur.com/cehnMGs.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')       
+#         fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_3'])])
+#         fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
+#         clustered_bollinger_bands(3)
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
+#         fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
+#             text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
+#             showarrow=True)        
+#         fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")        
+#         st.plotly_chart(fig, use_container_width = True)
+#         st.write("""This cluster is indicative of social media activity reporting about destructive actions in both Ukraine and Russia. It has stayed relatively stable since dropping in late-May, 2022.""")
+#         center_of_mass_plot(3)
+#         st.write("""This map shows the average location of the social media posts in this cluster.
+#         This location is focused in central-east Ukraine, as many destruction-related events have been published around the conflict's front, plus in the nearby Russian province of Belgorod.""")
+#     elif preds[-1] == 4:
+#         st.header('''Ukrainian Positions and Activities''')
+#         st.write("""Cluster 4: Ukrainian Positions and Activities. This cluster is focused on what Ukraine is doing in its battle plans. Activities related to troop movements, positioning, and UAV flights. Geographically the locations of the activities are focused in Eastern Ukraine, as there is a focus on defending the Donbas region. Previous spikes in activity have occurred when Ukraine was moving troops to retake parts of the country. Notably, this cluster has seen a significant decrease in activity recently, but very likely any increase in activity in this cluster means a possible Ukrainian counteroffensive.""")
+#         st.image('https://i.imgur.com/oSzS78r.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts') 
+#         fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_4'])])
+#         fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
+#         clustered_bollinger_bands(4)
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
+#         fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31,
+#             text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
+#             showarrow=True)        
+#         fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")        
+#         st.plotly_chart(fig, use_container_width = True)
+#         st.write("""Spikes in this cluster's post activity refer to the Ukrainian movements to retake lost territorial control. A spike in this cluster may be indicative of news of a Ukrainian counteroffensive.""")                
+#         center_of_mass_plot(4)
+#         st.write("""This map shows the average location of the social media posts in this cluster.
+#         The location is nearby the current conflict's front, notably behind the Ukrainian lines, as this cluster is associated with the side's activities.""")
+#     elif preds[-1] == 5:
+#         st.header('''Battle for Bakhmut''')
+#         st.write("""Cluster 5: Battle for Bakhmut. This cluster is focused on the Donbas, specifically the Donetsk Oblast in Ukraine. It is primarily concerned with activities around the besieged city, which has seen intense fighting since the late Fall, as Russia has focused its efforts on taking this city. It has very recently seen a massive spike in activity, as Russia's offsensive and Ukraine's fierce defense has resulted in the most active part of the conflict right now. Continued increase in this cluster is going to be indicative of intense fighting for the city. If this cluster decreases, it likely means the city has been taken over or is on the verge of being taken over by either side.""")
+#         st.image('https://i.imgur.com/CmJflm4.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')     
+#         fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_5'])])
+#         fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')        
+#         clustered_bollinger_bands(5)
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
+#         fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=42,
+#             text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
+#             showarrow=True)   
+#         fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")             
+#         st.plotly_chart(fig, use_container_width = True)
+#         st.write("""This cluster has seen a massive spike in activity as social media posts about the fight in the Donbas,
+#         specifically around the city of Bakhmut. """)
+#         center_of_mass_plot(5)
+#         st.write("""This map shows the average location of the social media posts in this cluster.
+#         The location is nearby the city of Bakhmut, where fighting has been most intense as of April 2023.""")
+#     elif preds[-1] == 6:
+#         st.header('''Satellite Imagery''')
+#         st.write("""Cluster 6: Satellite Imagery. This cluster is focused all over Ukraine and in neighboring countries, and is associated with images and reporting that uses satellite imagery. There have been noteworthy spikes in this cluster since the conflict began, and seems to be indicative of potential uncovering of human rights abuses and atrocities. For example, there was a spike of activity in April 2022, when satellite imagery was used to uncover human rights abuses in the city of Bucha outside Kyiv. This was again repeated in November of 2022, when Ukraine concluded its counteroffensive and took back territory in Kherson and Kharkiv, and again satellite imagery helped uncover evidence of atrocities in the towns formerly controlled by the Russian forces. There has been a lull in this cluster recently, but any increase in activity in this cluster might be indicative of using satellite imagery to document cases of activities that journalists or people keyed in to social media cannot get to.""")
+#         st.image('https://i.imgur.com/vv9QClc.png', caption = 'This is a generated word cloud image of the most-used words for this cluster, based on a training set of 10,000 posts')
+#         fig = go.Figure([go.Scatter(x=activity_counts_df['cal_date'], y=activity_counts_df['Cluster_6'])])
+#         fig.update_traces(mode="markers+lines", hovertemplate='Date: %{x} <br>Number of posts: %{y} <extra></extra>')
+#         clustered_bollinger_bands(6)
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] + (activity_counts_df['std'] * 2), line_color = 'gray', line = {'dash': 'dash'}, name = 'Upper Band', opacity = 0.3))
+#         fig.add_trace(go.Scatter(x = activity_counts_df['cal_date'], y = activity_counts_df['sma'] - activity_counts_df['sma'], name = 'Lower Band', opacity = 0.3, fill = 'tonexty', line_color = 'gray', line = {'dash': 'dash'}))
+#         fig.add_annotation(x=activity_counts_df.loc[activity_counts_df['cal_date'] == '5/05/2023'].to_json(), y=31, #I couldn't get annotations to work exactly how I wanted, so I'm pivoting
+#             text="Shaded areas identify number of social media posts in an expected 21-day average. <br> Anything not within this band signifies anomalous activity and may be indicative of a newsworthy development.",
+#             showarrow=True)
+#         fig.update_layout(showlegend=False, title = "Social media posts per day in this cluster")
+#         st.plotly_chart(fig, use_container_width = True)
+#         st.write("""This cluster's activity spikes when satellite imagery is used in social media posts.
+#         Notably, satellite imagery has been used to augment coverage of human rights abuses in Ukraine, and spikes in this cluster have focused on these posts.""")
+#         center_of_mass_plot(6)
+#         st.write("""This map shows the average location of the social media posts in this cluster.
+#         It is more centrally located, as many of the posts are referencing activities along the conflict's front and along the coast of Ukraine.""")        
+#     #Plot number of posts by cluster
+#     st.subheader('''Here is the breakdown of the number of posts in each cluster''')
+#     plt.figure(figsize=(10,10))
+#     preds_df.groupby('Prediction').size().sort_values(ascending=False).plot.bar()
+#     plt.title('Breakdown of Clusters')
+#     plt.xticks(rotation=0)
+#     plt.xlabel("Cluster number")
+#     plt.ylabel("Number of posts")
+#     st.pyplot() 
     
 #I used these sites to help make the interactive map: https://towardsdatascience.com/how-to-create-interactive-map-plots-with-plotly-7b57e889239a
 # https://towardsdatascience.com/build-a-multi-layer-map-using-streamlit-2b4d44eb28f3
@@ -459,10 +459,10 @@ st.subheader("Clustering Analysis")
 
 page = st.sidebar.selectbox(
     'Pages',
-    ('About', 'EDA', 'Predicting', 'Interactive Map')
+    ('Home Page', 'Cluster Types', 'Interactive Map', 'Model Details')
 )
 
-if page == 'About':
+if page == 'Home Page':
     st.subheader('''Extracting, Modeling, Classifying, and Displaying Geolocated Social Media Posts from the Russia-Ukraine War''')
     st.write('''Russia's February 2022 invasion of Ukraine marked the end of a two-decade peace in Europe, and is the largest land war in Europe since World War II. This war is also one of the first instances of a war fought in the social media and information space, as well. With the number of smart phones and people connected to the internet, both in Ukraine and around the world, the Russia-Ukraine conflict has been cataloged like no other war before it. Now media organizations are not the only ones covering the war, everyday people can do it by just taking a picture or a video and posting it to social media sites like Twitter, or Telegram. Whole ecosystems have sprouted up to facilitate it, such as individual users on Twitter aggregating media posts, to loosely moderated threads on message boards like Reddit.''')
     st.write('''There are also non-government organizations trawling through social media and capturing as much information about the posts. Analysts employed by these organizations use their skills and expertise to construct narratives and fill in the gaps that the data from social media might have missed. In many cases, these organizations are also making their data freely available to other organizations and governments for their own use. Some examples of these organizations are Bellingcat, Texty.ua, C4ADS, and @GeoConfirmed. These disparate organizations are using similar sources to analyze and display their data, but data may be missed by one or more. That is why it is imperative to utilize all that is out there to obtain a complete picture to track the conflict.''')
@@ -472,7 +472,60 @@ if page == 'About':
     expander.markdown("- The way the data are collected and labeled is not standardized across different sources, and need to be standardized in a more digestable format.")
     expander.markdown("- The data and its contents can be analyzed more holistically, across space and time, and models built out of it.")
     expander.markdown("- The data should be displayed in an understandable, relevant, and useful format, such as through charts and maps, on an interactive website dedicated to this.")
+    st.markdown('''This site allows users to access the results of a machine learning model that takes social media posts about the Russia-Ukraine conflict, analyzes the post's contents, and clusters it into one of seven distinct clusters. <br> <br>
+    Use the "Cluster Types" page on the screen to view the seven distinct clusters. <br> </br>
+    You can view an interactive map of the clusters on the "Interactive Map" page. <br> </br>
+    Finally, read the "Model Details" page for information about how this machine learning process was created.''', unsafe_allow_html = True)
+    st.markdown('***')
+    st.markdown('''Author: Adam Miner <br> </br>
+    Link to Github project repository: <a href= "https://github.com/minerad183/Extracting-and-Clustering-Posts" title="Extracting-and-Clustering-Posts">Extracting-and-Clustering-Posts.</a> <br> </br>
+    Last Updated: May 14, 2023''', unsafe_allow_html = True)
 
+elif page == 'Model Details':
+    st.subheader('''Data description''')
+    st.write('''This model analyzed close to ten thousand social media posts that came from Telegram and Twitter since the beginning of the conflict.''')
+    st.markdown('''These posts were filtered and geolocated by the non-profit community-based group called <a href="https://geoconfirmed.azurewebsites.net/" title="Geoconfirmed">Geoconfirmed.</a>''', unsafe_allow_html = True)
+    st.markdown('''The data was extracted using the <a href="https://pypi.org/project/osint-geo-extractor/" title="OSINT-Geo-Extractor">OSINT-Geo-Extractor package.</a>''', unsafe_allow_html = True)
+    st.write('''This returned back posts from databases of multiple groups, and after extracting, cleaning, and processing the data,
+    Geoconfirmed was determined to be a good trial case of the unsupervised learning classification.''')
+    st.markdown('''***''')
+    st.subheader('''Model description''')
+    st.markdown('''Text-based details of the social media posts, such as title and description, were captured and combined into one column.
+    Using a series of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" title="regular expressions">regular expressions</a>, and the <a href="https://www.nltk.org/search.html?q=stopwords" title="NLTK Stopwords">NLTK Stopwords</a> and <a href="https://www.nltk.org/api/nltk.stem.snowball.html" title="NLTK Snowball Stemmer">Snowball Stemmer</a>,
+    text was extracted for ease of passing it through the document vectorizer for modeling.<br> </br>
+    Here is an example of original text and the cleaned text:''', unsafe_allow_html = True)
+    st.table(pd.DataFrame(({'Original Data': ['Train with various Russian equipment on the move through Krasnodar PART 2. 2X38+643 Krasnodar, Russia - 29 1533 JAN 2022'],
+                            'Processed Data': ['train various russian equip move krasnodar part 1 2x38 646 krasnodar russia 29 1532 2022 circl e00000 ru 56 161']})))
+    st.markdown('''The processed text was then run though what is known as a <a href="https://www.learndatasci.com/glossary/tf-idf-term-frequency-inverse-document-frequency/" title="TF-IDF">Term Frequency-Inverse Document Freqency (TF-IDF) vectorizer</a>.
+    This scaled each word based on its importance in the text and the entire corpus of ten thousand posts, turned it into a series of numbers, and allowed it to be passed through to an **unsupervised learning algorithm**.''', unsafe_allow_html = True)
+    st.markdown('''The algorithm used to cluster each post within this social media dataset was <a href="https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1" title="K-Means">K-Means Clustering</a>. This algorithm searched the 
+    vectorized corpus of texts and grouped the social media posts based on which series of values were closest to each other. Multiple passthroughs of tuning was needed to decide how many clusters to group the social media posts into. Based on the results of these passthroughs, seven clusters
+    was the optimal number of clusters to segment the social media posts into meaningful groups.''', unsafe_allow_html = True)
+    #Plot number of posts by cluster
+    st.subheader('''Here is the breakdown of the number of posts in each cluster''')
+    plt.figure(figsize=(10,10))
+    clusters_df.groupby('clusters').size().sort_values(ascending=False).plot.bar()
+    plt.title('Breakdown of Clusters')
+    plt.xticks(rotation=0)
+    plt.xlabel("Cluster number")
+    plt.ylabel("Number of posts")
+    st.pyplot() 
+    st.markdown('''***''')
+    st.subheader('''Limitations''')
+    st.markdown('''Using this model allows for quick on-the-fly iteration and meaningful extraction of information for surface-level analysis, such as producing papers on the narratives of the Russia-Ukraine conflict, or to determine if there is an ongoing activity in one of these clusters, especially related to wartime offensives or human rights abuses.
+    It also is helpful in extracting similar-themed social media posts quickly, versus having to trawl through social media sites to collect and group them. <br> </br> Using unsupervised learning on the contents of posts allows the machine to save hours of analysis. However, it is only as powerful as the data that the machine trains on, and the process undertaken to meaningfully clean, process, and extract the text from posts.
+    This method is one of several that could be utilized to process the data. <br> </br> In addition, it does not include other identifying and potentially useful information to cluster, such as geographic or time-based information.
+    Through analysis of the spatial and temporal contents of the clusters, this text clustering algorithm did a very good job of grouping it in a spatio-temporal pattern, but this is not always successful. <br> </br>''', unsafe_allow_html = True)
+    st.markdown('''***''')
+    st.subheader('''Next Steps''')
+    st.markdown('''**Next steps in this project are as follows:**
+    <ul>
+    <li>Expand the dataset to include other sources of filtered conflict data. There are several of these groups that do similar collection like GeoConfirmed. Combining the data together (as well as removing duplicate social media posts) will make for a stronger dataset to train models on.</li>
+    <li>Refine the process of cleaning, stemming, and vectorizing the data. For example, instead of TF-IDF algorithm, use <a href="https://towardsdatascience.com/multi-class-text-classification-with-doc2vec-logistic-regression-9da9947b43f4" title="Doc2Vec">Doc2Vec.</a></li>
+    <li>Utilize a different clustering algorithm, like <a href= "https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html"title="DBSCAN">DBSCAN.</a> This will hopefully allow for a stronger, more fitting, more cluster impactful model.</li>
+    <li>Incorporate more spatial analysis into the model. For example, every post in these datasets have geolocated post data. Use spatial point pattern analysis to determine similar posts not only in text information, but location-based information.</li>
+    <li>Rerun the model on a month's worth of recent data. Data were collected up until April 20th, 2023. Test the model on data from this point on to see how the model fits new events, and whether assertions and judgements made in the cluster analysis hold true.</li>
+    </ul>''', unsafe_allow_html = True)
 elif page == 'Interactive Map':
     updatemenus=list([
         # drop-down 1: map styles menu
@@ -563,17 +616,17 @@ elif page == 'Interactive Map':
 
     st.plotly_chart(fig, use_container_width = True)
 
-elif page == 'Predicting':
-    st.subheader('''This page allows you to enter in text of a tweet and have it be clustered by the model.''')
-    st.write('''Enter your text in the box below''')
-    input_text = st.text_input(label = 'Enter your text here', help = 'Make sure to use English words or translations.')
-    if st.button('Results'):
-        cluster_display_function(input_text)
-        change_variable = 'visible' 
-    st.text("")
-    st.text("")
-    st.text("")
-    option = st.selectbox(label = 'Select another cluster to view',
+elif page == 'Cluster Types':
+    st.subheader('''This page defines the different cluster types the unsupervised learning model produced.''')
+    # st.write('''Enter your text in the box below''')
+    # input_text = st.text_input(label = 'Enter your text here', help = 'Make sure to use English words or translations.')
+    # if st.button('Results'):
+    #     cluster_display_function(input_text)
+    #     change_variable = 'visible' 
+    # st.text("")
+    # st.text("")
+    # st.text("")
+    option = st.selectbox(label = 'Select a cluster to view',
                     options = ('Russian Movements and Activities',
                             'Global Russian and Ukrainian Activities',
                             'The Siege of Mariupol',

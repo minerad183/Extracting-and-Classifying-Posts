@@ -168,6 +168,7 @@ def center_of_mass_plot(cluster_number):
                                 marker = dict(size = 12, color = traces), name = f'Cluster {cluster_number}', hovertemplate='Latitude: %{lat} <br> Longitude: %{lon} <extra></extra>')
         fig = go.Figure(data = trace, layout = layout_com)
         st.plotly_chart(fig, use_container_width = True)
+        
 # Define the model prediction function and return display here
 def cluster_display_function(text_values):
     #Clean the text
@@ -419,10 +420,10 @@ st.subheader("Clustering Analysis")
 
 page = st.sidebar.selectbox(
     'Pages',
-    ('About', 'EDA', 'Predicting', 'Interactive Map')
+    ('Home Page', 'Predicting', 'Interactive Map', 'Model Details')
 )
 
-if page == 'About':
+if page == 'Home Page':
     st.subheader('''Extracting, Modeling, Classifying, and Displaying Geolocated Social Media Posts from the Russia-Ukraine War''')
     st.write('''Russia's February 2022 invasion of Ukraine marked the end of a two-decade peace in Europe, and is the largest land war in Europe since World War II. This war is also one of the first instances of a war fought in the social media and information space, as well. With the number of smart phones and people connected to the internet, both in Ukraine and around the world, the Russia-Ukraine conflict has been cataloged like no other war before it. Now media organizations are not the only ones covering the war, everyday people can do it by just taking a picture or a video and posting it to social media sites like Twitter, or Telegram. Whole ecosystems have sprouted up to facilitate it, such as individual users on Twitter aggregating media posts, to loosely moderated threads on message boards like Reddit.''')
     st.write('''There are also non-government organizations trawling through social media and capturing as much information about the posts. Analysts employed by these organizations use their skills and expertise to construct narratives and fill in the gaps that the data from social media might have missed. In many cases, these organizations are also making their data freely available to other organizations and governments for their own use. Some examples of these organizations are Bellingcat, Texty.ua, C4ADS, and @GeoConfirmed. These disparate organizations are using similar sources to analyze and display their data, but data may be missed by one or more. That is why it is imperative to utilize all that is out there to obtain a complete picture to track the conflict.''')
@@ -432,6 +433,60 @@ if page == 'About':
     expander.markdown("- The way the data are collected and labeled is not standardized across different sources, and need to be standardized in a more digestable format.")
     expander.markdown("- The data and its contents can be analyzed more holistically, across space and time, and models built out of it.")
     expander.markdown("- The data should be displayed in an understandable, relevant, and useful format, such as through charts and maps, on an interactive website dedicated to this.")
+    st.markdown('''This site allows users to access the results of a machine learning model that takes social media posts about the Russia-Ukraine conflict, analyzes the post's contents, and clusters it into one of seven distinct clusters. <br> <br>
+    Use the "Cluster Types" page on the screen to view the seven distinct clusters. <br> </br>
+    You can view an interactive map of the clusters on the "Interactive Map" page. <br> </br>
+    Finally, read the "Model Details" page for information about how this machine learning process was created.''', unsafe_allow_html = True)
+    st.markdown('***')
+    st.markdown('''Author: Adam Miner <br> </br>
+    Link to Github project repository: <a href= "https://github.com/minerad183/Extracting-and-Clustering-Posts" title="Extracting-and-Clustering-Posts">Extracting-and-Clustering-Posts.</a> <br> </br>
+    Last Updated: May 14, 2023''', unsafe_allow_html = True)
+
+elif page == 'Model Details':
+    st.subheader('''Data description''')
+    st.write('''This model analyzed close to ten thousand social media posts that came from Telegram and Twitter since the beginning of the conflict.''')
+    st.markdown('''These posts were filtered and geolocated by the non-profit community-based group called <a href="https://geoconfirmed.azurewebsites.net/" title="Geoconfirmed">Geoconfirmed.</a>''', unsafe_allow_html = True)
+    st.markdown('''The data was extracted using the <a href="https://pypi.org/project/osint-geo-extractor/" title="OSINT-Geo-Extractor">OSINT-Geo-Extractor package.</a>''', unsafe_allow_html = True)
+    st.write('''This returned back posts from databases of multiple groups, and after extracting, cleaning, and processing the data,
+    Geoconfirmed was determined to be a good trial case of the unsupervised learning classification.''')
+    st.markdown('''***''')
+    st.subheader('''Model description''')
+    st.markdown('''Text-based details of the social media posts, such as title and description, were captured and combined into one column.
+    Using a series of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" title="regular expressions">regular expressions</a>, and the <a href="https://www.nltk.org/search.html?q=stopwords" title="NLTK Stopwords">NLTK Stopwords</a> and <a href="https://www.nltk.org/api/nltk.stem.snowball.html" title="NLTK Snowball Stemmer">Snowball Stemmer</a>,
+    text was extracted for ease of passing it through the document vectorizer for modeling.<br> </br>
+    Here is an example of original text and the cleaned text:''', unsafe_allow_html = True)
+    st.table(pd.DataFrame(({'Original Data': ['Train with various Russian equipment on the move through Krasnodar PART 2. 2X38+643 Krasnodar, Russia - 29 1533 JAN 2022'],
+                            'Processed Data': ['train various russian equip move krasnodar part 1 2x38 646 krasnodar russia 29 1532 2022 circl e00000 ru 56 161']})))
+    st.markdown('''The processed text was then run though what is known as a <a href="https://www.learndatasci.com/glossary/tf-idf-term-frequency-inverse-document-frequency/" title="TF-IDF">Term Frequency-Inverse Document Freqency (TF-IDF) vectorizer</a>.
+    This scaled each word based on its importance in the text and the entire corpus of ten thousand posts, turned it into a series of numbers, and allowed it to be passed through to an **unsupervised learning algorithm**.''', unsafe_allow_html = True)
+    st.markdown('''The algorithm used to cluster each post within this social media dataset was <a href="https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1" title="K-Means">K-Means Clustering</a>. This algorithm searched the 
+    vectorized corpus of texts and grouped the social media posts based on which series of values were closest to each other. Multiple passthroughs of tuning was needed to decide how many clusters to group the social media posts into. Based on the results of these passthroughs, seven clusters
+    was the optimal number of clusters to segment the social media posts into meaningful groups.''', unsafe_allow_html = True)
+    #Plot number of posts by cluster
+    st.subheader('''Here is the breakdown of the number of posts in each cluster''')
+    plt.figure(figsize=(10,10))
+    clusters_df.groupby('clusters').size().sort_values(ascending=False).plot.bar()
+    plt.title('Breakdown of Clusters')
+    plt.xticks(rotation=0)
+    plt.xlabel("Cluster number")
+    plt.ylabel("Number of posts")
+    st.pyplot() 
+    st.markdown('''***''')
+    st.subheader('''Limitations''')
+    st.markdown('''Using this model allows for quick on-the-fly iteration and meaningful extraction of information for surface-level analysis, such as producing papers on the narratives of the Russia-Ukraine conflict, or to determine if there is an ongoing activity in one of these clusters, especially related to wartime offensives or human rights abuses.
+    It also is helpful in extracting similar-themed social media posts quickly, versus having to trawl through social media sites to collect and group them. <br> </br> Using unsupervised learning on the contents of posts allows the machine to save hours of analysis. However, it is only as powerful as the data that the machine trains on, and the process undertaken to meaningfully clean, process, and extract the text from posts.
+    This method is one of several that could be utilized to process the data. <br> </br> In addition, it does not include other identifying and potentially useful information to cluster, such as geographic or time-based information.
+    Through analysis of the spatial and temporal contents of the clusters, this text clustering algorithm did a very good job of grouping it in a spatio-temporal pattern, but this is not always successful. <br> </br>''', unsafe_allow_html = True)
+    st.markdown('''***''')
+    st.subheader('''Next Steps''')
+    st.markdown('''**Next steps in this project are as follows:**
+    <ul>
+    <li>Expand the dataset to include other sources of filtered conflict data. There are several of these groups that do similar collection like GeoConfirmed. Combining the data together (as well as removing duplicate social media posts) will make for a stronger dataset to train models on.</li>
+    <li>Refine the process of cleaning, stemming, and vectorizing the data. For example, instead of TF-IDF algorithm, use <a href="https://towardsdatascience.com/multi-class-text-classification-with-doc2vec-logistic-regression-9da9947b43f4" title="Doc2Vec">Doc2Vec.</a></li>
+    <li>Utilize a different clustering algorithm, like <a href= "https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html"title="DBSCAN">DBSCAN.</a> This will hopefully allow for a stronger, more fitting, more cluster impactful model.</li>
+    <li>Incorporate more spatial analysis into the model. For example, every post in these datasets have geolocated post data. Use spatial point pattern analysis to determine similar posts not only in text information, but location-based information.</li>
+    <li>Rerun the model on a month's worth of recent data. Data were collected up until April 20th, 2023. Test the model on data from this point on to see how the model fits new events, and whether assertions and judgements made in the cluster analysis hold true.</li>
+    </ul>''', unsafe_allow_html = True)
 
 elif page == 'Interactive Map':
     updatemenus=list([
