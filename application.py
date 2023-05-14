@@ -77,7 +77,11 @@ stpwrd = ['i', 'me', 'my','myself','we','our','ours','ourselves','you','you''re'
 "ve","y","ain","aren","aren't","couldn","couldn't","didn","didn't","doesn",
 "doesn't","hadn","hadn't","hasn","hasn't","haven","haven't","isn",
 "isn't","ma","mightn","mightn't","mustn","mustn't","needn","needn't",
-"shan","shan't","shouldn","shouldn't","wasn","wasn't","weren","weren't","won","won't","wouldn","wouldn't"]
+"shan","shan't","shouldn","shouldn't","wasn","wasn't","weren","weren't","won","won't","wouldn","wouldn't", "twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
+                 'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
+                'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
+                'õ', 'ð', 'ã', 'Ý', 'Ü', 'Û', 'Ú', 'Ù', 'Ï', 'Î', 'Í', 'Ì', 'Ë', 'Ê', 'É', 'È', 'Å', 'Ä', 'Ã', 'Â', 'Á', 'À', 'Ö', 'Õ', 'Ô','Ó', 'Ò',
+                'ÂƒÆ', 'â', 'Âƒâ', 'šâ', 'šÂ', 'Ž', 'žÂ', 'ÃƒÆ', 'Ãƒâ', 'ƒ', 'šÃ'  ]
 new_stopwords = ["twitter", 'geoconfirmed', 'com', 'br', 'https', 'geo', 'png',
                  'status', 'vid', 'f', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 
                 'sep', 'oct', 'nov', 'dec', 'Æ', 'ô', 'ö', 'ò', 'û', 'ù', 'ÿ', 'á', 'í', 'ó', 'ú', 'ñ', 'Ñ', 'Š', 'š', 'ý', 'ü',
@@ -117,11 +121,11 @@ def review_to_wordlist(review, remove_stopwords=True):
         review_text = re.sub(i, " ", review_text)
     words = review_text.split()
     
-    # Shorten words to their stems
-    stemmer = SnowballStemmer('english', ignore_stopwords = True)
-    stemmed_words = [stemmer.stem(word) for word in words]
+    # # Shorten words to their stems
+    # stemmer = SnowballStemmer('english', ignore_stopwords = True)
+    # stemmed_words = [stemmer.stem(word) for word in words]
     
-    review_text = " ".join(stemmed_words)
+    # review_text = " ".join(stemmed_words)
     
     # Return a list of words
     return(review_text)
@@ -216,7 +220,7 @@ def cluster_display_function(text_values):
     # body = response['Body'].read()
     # vectorizer = pickle.loads(body)
     model = pd.read_pickle('https://clusteringappdevfolder.s3.amazonaws.com/data/vectorizer.pkl')    
-    vectorizer = TfidfVectorizer(stop_words='english')
+    vectorizer = TfidfVectorizer(stop_words=stpwrd)
     X = vectorizer.fit_transform(postfeatures)
     #Next, fit the text into the classifier model
     # response = s3client.get_object(Bucket='clusteringappdevfolder', Key='https://clusteringappdevfolder.s3.amazonaws.com/data/class_model.pkl')
