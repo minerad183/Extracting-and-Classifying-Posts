@@ -4,7 +4,6 @@ plotly
 numpy
 geopandas
 pandas
-pickle
 json
 shapely
 nltk
