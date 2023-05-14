@@ -6,5 +6,4 @@ geopandas
 pandas
 shapely
 nltk
-re
 datetime
