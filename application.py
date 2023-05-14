@@ -19,28 +19,28 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 #Read in data
-clusters_df = pd.read_csv('/data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
+clusters_df = pd.read_csv('s3://clusteringappdevfolder/data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
 clusters_df['geometry'] = clusters_df.apply(lambda row: shapely.Point(row['longitude'], row['latitude']), axis=1)
 clusters_df = gpd.GeoDataFrame(clusters_df, geometry='geometry')
 clusters_df = clusters_df.set_crs("EPSG:4326", allow_override=True)
-activity_counts_df = pd.read_csv('data/activity_counts.csv', encoding="utf-8")
+activity_counts_df = pd.read_csv('s3://clusteringappdevfolder/data/activity_counts.csv', encoding="utf-8")
 activity_counts_df.reset_index(inplace = True)
 Ukraine_bnd = gpd.read_file('https://github.com/wmgeolab/geoBoundaries/raw/905b0ba/releaseData/gbOpen/UKR/ADM0/geoBoundaries-UKR-ADM0_simplified.geojson')
 
 # mapbox token
 mapboxtoken = 'pk.eyJ1IjoibWluZXJhZCIsImEiOiJjbGhnYm5nZGEwM2JjM3FwbjBnbnN4cHQ4In0.r_9syT8uhNvtxeH4unVpRg'
 
-# set GeoJSON file path
-path = '/data/geojson.json'
-# write GeoJSON to file
-clusters_df.to_file(path, driver = "GeoJSON", encoding='utf-8')
-with open(path, encoding = 'utf-8') as geofile:
-   j_file = json.load(geofile)
-# index geojson
-i=1
-for feature in j_file["features"]:
-   feature ['id'] = str(i).zfill(2)
-   i += 1
+# # set GeoJSON file path
+# path = '/data/geojson.json'
+# # write GeoJSON to file
+# clusters_df.to_file(path, driver = "GeoJSON", encoding='utf-8')
+# with open(path, encoding = 'utf-8') as geofile:
+#    j_file = json.load(geofile)
+# # index geojson
+# i=1
+# for feature in j_file["features"]:
+#    feature ['id'] = str(i).zfill(2)
+#    i += 1
 
 
 # Stopword removal
