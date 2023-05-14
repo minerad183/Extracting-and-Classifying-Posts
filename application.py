@@ -6,7 +6,6 @@ import plotly.graph_objs as go
 import json
 import shapely
 import streamlit.components.v1 as components
-from nltk.stem import SnowballStemmer
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression

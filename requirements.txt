@@ -5,6 +5,5 @@ numpy
 geopandas
 pandas
 shapely
-nltk
 datetime
 matplotlib
