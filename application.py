@@ -19,11 +19,11 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 #Read in data
-clusters_df = pd.read_csv('./data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
+clusters_df = pd.read_csv('/data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
 clusters_df['geometry'] = clusters_df.apply(lambda row: shapely.Point(row['longitude'], row['latitude']), axis=1)
 clusters_df = gpd.GeoDataFrame(clusters_df, geometry='geometry')
 clusters_df = clusters_df.set_crs("EPSG:4326", allow_override=True)
-activity_counts_df = pd.read_csv('./data/activity_counts.csv', encoding="utf-8")
+activity_counts_df = pd.read_csv('data/activity_counts.csv', encoding="utf-8")
 activity_counts_df.reset_index(inplace = True)
 Ukraine_bnd = gpd.read_file('https://github.com/wmgeolab/geoBoundaries/raw/905b0ba/releaseData/gbOpen/UKR/ADM0/geoBoundaries-UKR-ADM0_simplified.geojson')
 
@@ -31,7 +31,7 @@ Ukraine_bnd = gpd.read_file('https://github.com/wmgeolab/geoBoundaries/raw/905b0
 mapboxtoken = 'pk.eyJ1IjoibWluZXJhZCIsImEiOiJjbGhnYm5nZGEwM2JjM3FwbjBnbnN4cHQ4In0.r_9syT8uhNvtxeH4unVpRg'
 
 # set GeoJSON file path
-path = './data/geojson.json'
+path = '/data/geojson.json'
 # write GeoJSON to file
 clusters_df.to_file(path, driver = "GeoJSON", encoding='utf-8')
 with open(path, encoding = 'utf-8') as geofile:
@@ -180,12 +180,12 @@ def cluster_display_function(text_values):
     for i in clusters_df['list_text']:
         postfeatures.append(review_to_wordlist(i, remove_stopwords=True))
     y =  clusters_df['clusters']
-    with open("./data/vectorizer.pkl", 'rb') as picklefile:
+    with open("/data/vectorizer.pkl", 'rb') as picklefile:
         vectorizer  = pickle.load(picklefile)
     vectorizer = TfidfVectorizer(stop_words='english')
     X = vectorizer.fit_transform(postfeatures)
     #Next, fit the text into the classifier model
-    with open("./data/class_model.pkl", 'rb') as picklefile:
+    with open("/data/class_model.pkl", 'rb') as picklefile:
         model  = pickle.load(picklefile)
     model.fit(X, y)
     #Append the vect_text into the postfeatures space and then use the model predict on it - call the last entry
