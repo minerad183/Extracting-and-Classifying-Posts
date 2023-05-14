@@ -3,3 +3,11 @@ streamlit
 plotly
 numpy
 geopandas
+pandas
+pickle
+json
+shapely
+nltk
+re
+matplotlib
+datetime
