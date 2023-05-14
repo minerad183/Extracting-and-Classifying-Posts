@@ -4,9 +4,7 @@ plotly
 numpy
 geopandas
 pandas
-json
 shapely
 nltk
 re
-matplotlib
 datetime
