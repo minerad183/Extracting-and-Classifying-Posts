@@ -13,17 +13,28 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 import datetime as dt
+# import boto3
+# import boto3.session
 
+# cred = boto3.Session().get_credentials()
+# ACCESS_KEY = cred.access_key
+# SECRET_KEY = cred.secret_key
+# SESSION_TOKEN = cred.token  ## optional
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+# st.set_option('deprecation.showPyplotGlobalUse', False)
 
+# s3client = boto3.client('s3', 
+#                         aws_access_key_id = ACCESS_KEY, 
+#                         aws_secret_access_key = SECRET_KEY, 
+#                         aws_session_token = SESSION_TOKEN
+#                        )
 
 #Read in data
-clusters_df = pd.read_csv('s3://clusteringappdevfolder/data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
+clusters_df = pd.read_csv('https://clusteringappdevfolder.s3.amazonaws.com/data/get_geoconfirmed_data_clusters.csv', encoding="utf-8")
 clusters_df['geometry'] = clusters_df.apply(lambda row: shapely.Point(row['longitude'], row['latitude']), axis=1)
 clusters_df = gpd.GeoDataFrame(clusters_df, geometry='geometry')
 clusters_df = clusters_df.set_crs("EPSG:4326", allow_override=True)
-activity_counts_df = pd.read_csv('s3://clusteringappdevfolder/data/activity_counts.csv', encoding="utf-8")
+activity_counts_df = pd.read_csv('https://clusteringappdevfolder.s3.amazonaws.com/data/activity_counts.csv', encoding="utf-8")
 activity_counts_df.reset_index(inplace = True)
 Ukraine_bnd = gpd.read_file('https://github.com/wmgeolab/geoBoundaries/raw/905b0ba/releaseData/gbOpen/UKR/ADM0/geoBoundaries-UKR-ADM0_simplified.geojson')
 
@@ -180,13 +191,17 @@ def cluster_display_function(text_values):
     for i in clusters_df['list_text']:
         postfeatures.append(review_to_wordlist(i, remove_stopwords=True))
     y =  clusters_df['clusters']
-    with open("/data/vectorizer.pkl", 'rb') as picklefile:
-        vectorizer  = pickle.load(picklefile)
+    # response = s3client.get_object(Bucket='clusteringappdevfolder', Key='https://clusteringappdevfolder.s3.amazonaws.com/data/vectorizer.pkl')
+    # body = response['Body'].read()
+    # vectorizer = pickle.loads(body)
+    model = pd.read_pickle('https://clusteringappdevfolder.s3.amazonaws.com/data/vectorizer.pkl')    
     vectorizer = TfidfVectorizer(stop_words='english')
     X = vectorizer.fit_transform(postfeatures)
     #Next, fit the text into the classifier model
-    with open("/data/class_model.pkl", 'rb') as picklefile:
-        model  = pickle.load(picklefile)
+    # response = s3client.get_object(Bucket='clusteringappdevfolder', Key='https://clusteringappdevfolder.s3.amazonaws.com/data/class_model.pkl')
+    # body = response['Body'].read()
+    # model = pickle.loads(body)
+    model = pd.read_pickle('https://clusteringappdevfolder.s3.amazonaws.com/data/class_model.pkl')
     model.fit(X, y)
     #Append the vect_text into the postfeatures space and then use the model predict on it - call the last entry
     #Drop word if it does not appear in current postfeatures list (otherwise the model gets messed up)
