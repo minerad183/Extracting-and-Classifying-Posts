@@ -1,4 +1,4 @@
-# Working Readme
+# Readme
 
 # Extracting, Modeling, Clustering, and Displaying Geolocated Social Media Posts from the Russia-Ukraine War
 
@@ -126,7 +126,7 @@ Doing a classification prediction model on the user input, versus doing another 
 | ------ | ----------- | ----------- |
 | activity_counts.csv   | Created CSV used for time series modeling |data |
 | bellingcat.csv   | Data from Bellingcat using the OSINT Geo Extractor and web scraping |data |
-| ceninfores.csv   | Data from Ceninfores using the OSINT Geo Extractor|datasets |
+| ceninfores.csv   | Data from Ceninfores using the OSINT Geo Extractor|data |
 | class_model.pkl   | Pickle file of the classification model for the prediction algorithm|data |
 | defmon.csv   | Data from Defmon using the OSINT Geo Extractor |data |
 | geojson.json   | GeoJSON information of the Geoconfirmed dataset |data |
@@ -150,8 +150,8 @@ Doing a classification prediction model on the user input, versus doing another 
 | 02_unsupervised_clustering.ipynb   | Notebook to do the preprocessing and K-means clustering  |notebooks |
 | 03_clusters_spatial_temporal_eda.ipynb   | Text, spatial, and temporal EDA notebook  |notebooks |
 | 04_classification_model.ipynb   | Classification model on the clustered data, for predictions |notebooks |
-| Miner_Presentation_Project_3.pptx   | Powerpoint presentation slides  |presentation |
-| miner_nlp_acolyte_dnd_classifiers.pdf   | PDF version of powerpoint presentation slides  |presentation |
+| Miner_Presentation_Capstone.pptx   | Powerpoint presentation slides  |presentation |
+| Miner_Presentation_Capstone.pdf   | PDF version of powerpoint presentation slides  |presentation |
 
 ### Relevant and Featured Data and Columns
 
