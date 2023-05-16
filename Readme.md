@@ -96,6 +96,8 @@ There are two web application python files in this repo. The first one, in the d
 
 The second web application python file, called application and in the main folder, is the application file that creates the cloud-based web app hosted on Render. Unfortunately, there were many issues attempting to put the prediction algorithm into this cloud-based web application that were outside of my control, so this web application shows everything but that. If a software developer with more experience accessing NLTK's data (or other SDK data) would like to bring the prediction model back in, that would be greatly appreciated.
 
+_May 15 note: Try this <a href="https://minerad183-extracting-and-clustering-posts-application-9jlnkh.streamlit.app/" title="Streamlit App">streamlit site's page, as it might work:</a>
+
 #### Classification Model
 
 The last stage in this project was to create a classification model off of the clustered data. This classification model is what runs on the user-inputted text information.
