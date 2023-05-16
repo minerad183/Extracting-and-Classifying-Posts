@@ -434,7 +434,7 @@ if page == 'Home Page':
     expander.markdown("- The data and its contents can be analyzed more holistically, across space and time, and models built out of it.")
     expander.markdown("- The data should be displayed in an understandable, relevant, and useful format, such as through charts and maps, on an interactive website dedicated to this.")
     st.markdown('''This site allows users to access the results of a machine learning model that takes social media posts about the Russia-Ukraine conflict, analyzes the post's contents, and clusters it into one of seven distinct clusters. <br> <br>
-    Use the "Cluster Types" page on the screen to view the seven distinct clusters. <br> </br>
+    Use the "Predicting" page on the screen to view the seven distinct clusters. <br> </br>
     You can view an interactive map of the clusters on the "Interactive Map" page. <br> </br>
     Finally, read the "Model Details" page for information about how this machine learning process was created.''', unsafe_allow_html = True)
     st.markdown('***')
