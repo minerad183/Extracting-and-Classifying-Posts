@@ -28,7 +28,7 @@ Duplicate posts should be removed, and any artifacts or irrelevant or incorrect 
 Using the typology created, design and implement a clustering model that takes in all the data and predicts what type of activity the social media post is cataloging, and who is the commitor of the activity (Russia, Ukraine, something else). The clustering model will use Natural Language Processing (NLP) to take the text information for each of the social media posts. It will also incorporate some sort of geographic component if applicable and useful, such as missile attacks striking central Ukraine categorized as a missile attack from Russia. Try any number of models with different parameters to attempt and create a highly accurate model on the already existing data, and then test it on the new data entering the database.
 
 ### Create a website that features the data, the model, and analysis of the data
-Using the [Streamlit API](https://streamlit.io/) and hosted on [Render](https://extracting-and-clustering-posts-webapp.onrender.com/), create viewable charts and graphs, and a map, of the data with relevant analysis. The model's predictions should be used as data features in this website.
+Using the [Streamlit API](https://streamlit.io/) and hosted on [Streamlit](https://minerad183-extracting-and-clustering-posts-application-9jlnkh.streamlit.app/), create viewable charts and graphs, and a map, of the data with relevant analysis. The model's predictions should be used as data features in this website.
 
 
 **Possible Questions to Answer**
@@ -96,7 +96,7 @@ There are two web application python files in this repo. The first one, in the d
 
 The second web application python file, called application and in the main folder, is the application file that creates the cloud-based web app hosted on Render. Unfortunately, there were many issues attempting to put the prediction algorithm into this cloud-based web application that were outside of my control, so this web application shows everything but that. If a software developer with more experience accessing NLTK's data (or other SDK data) would like to bring the prediction model back in, that would be greatly appreciated.
 
-_May 15 note: Try this <a href="https://minerad183-extracting-and-clustering-posts-application-9jlnkh.streamlit.app/" title="Streamlit App">streamlit site's page, as it might work:</a>
+_May 15 note: Try this <a href="https://minerad183-extracting-and-clustering-posts-application-9jlnkh.streamlit.app/" title="Streamlit App">streamlit site's page, as it might work:</a>_
 
 #### Classification Model
 
